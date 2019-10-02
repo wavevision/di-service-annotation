@@ -18,12 +18,15 @@ class ExtractServicesTest extends TestCase
 
 	public function testRun(): void
 	{
-		/*$filesToCreate = explode("\n", FileSystem::read($this->path('Services/.gitignore')));
-		foreach ($filesToCreate as $file) {
-			//FileSystem::delete($this->path('Services', $file));
-		}*/
+		$filesToCreate = explode("\n", trim(FileSystem::read($this->path('Services/.gitignore'))));
+		foreach ($filesToCreate as $key => $file) {
+			$pathname = $this->path('Services', $file);
+			$filesToCreate[$key] = $pathname;
+			if (is_file($pathname)) {
+				FileSystem::delete($pathname);
+			}
+		}
 		$servicesDir = __DIR__ . '/Services';
-
 		$extractServices = new ExtractServices(
 			new AnnotationReader(),
 			new Tokenizer(),
@@ -39,9 +42,9 @@ class ExtractServicesTest extends TestCase
 		$extractServices->run();
 		$this->assertSameConfig(self::DEFAULT_NEON);
 		$this->assertSameConfig(self::NESTED_NEON);
-		$this->assertFileExists($this->path('Services/InjectInterfaceService.php'));
-		$this->assertFileExists($this->path('Services/Nested/ClassServiceFactory.php'));
-		$this->assertFileExists($this->path('Services/Nested/InjectClassServiceFactory.php'));
+		foreach ($filesToCreate as $file) {
+			$this->assertFileExists($file);
+		}
 	}
 
 	private function assertSameConfig(string $config): void

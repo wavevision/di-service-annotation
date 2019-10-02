@@ -2,7 +2,6 @@
 
 namespace Wavevision\DIServiceAnnotationTests\Services\Nested;
 
-
 interface ControlFactory
 {
 
