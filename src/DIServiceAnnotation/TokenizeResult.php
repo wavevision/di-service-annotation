@@ -48,6 +48,6 @@ class TokenizeResult
 
 	public function getFullyQualifiedName(): string
 	{
-		return $this->namespace === null ? $this->name : $this->namespace . '\\' . $this->name;
+		return $this->getNamespace() === null ? $this->getName() : $this->getNamespace() . '\\' . $this->getName();
 	}
 }

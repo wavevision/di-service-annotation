@@ -31,6 +31,9 @@ class ExtractServicesTest extends TestCase
 			new AnnotationReader(),
 			new Tokenizer(),
 			(new Configuration($servicesDir, $this->resultNeon(self::DEFAULT_NEON)))
+				->setMask('*.php')
+				->setSourceDirectory($servicesDir)
+				->setOutputFile($this->resultNeon(self::DEFAULT_NEON))
 				->setInjectMask('Inject%s')
 				->setFactoryMask('%sFactory')
 				->setFileMapping(
