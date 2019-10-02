@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="Point">
+    <rule ref="vendor/wavevision/coding-standard/php/WavevisionCodingStandard/ruleset.xml"/>
+    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+        <properties>
+            <property name="rootNamespaces" type="array">
+                <element key="src" value="Wavevision"/>
+                <element key="tests" value="Wavevision"/>
+            </property>
+        </properties>
+    </rule>
+</ruleset>

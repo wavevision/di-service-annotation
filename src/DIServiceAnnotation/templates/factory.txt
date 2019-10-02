@@ -1,0 +1,9 @@
+<?php declare (strict_types = 1);
+
+namespace %1$s;
+
+interface %2$s
+{
+
+	public function create(): %3$s;
+}
