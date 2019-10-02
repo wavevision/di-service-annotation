@@ -12,6 +12,11 @@
       "Wavevision\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Wavevision\\": "tests/"
+    }
+  },
   "require": {
     "php": ">=7.2",
     "doctrine/annotations": "^1.8",

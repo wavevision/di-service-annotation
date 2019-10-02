@@ -10,7 +10,7 @@
     <property name="bin" value="vendor/bin"/>
 
     <target name="check" description="Run lints and tests. Run before every pull request"
-            depends="rm-cache, lint, cs, phpstan"/>
+            depends="rm-cache, lint, cs, phpstan, test"/>
     <target name="cs" description="Check code style and fix it if possible" depends="phpcbf, phpcs"/>
     <target name="init" description="Initialize project" depends="composer"/>
 

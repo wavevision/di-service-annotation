@@ -1,0 +1,6 @@
+# generated file do not modify directly
+services:
+	- implement: Wavevision\DIServiceAnnotationTests\Services\Nested\ClassServiceFactory
+	  inject: on
+	- implement: Wavevision\DIServiceAnnotationTests\Services\Nested\ControlFactory
+	  inject: on

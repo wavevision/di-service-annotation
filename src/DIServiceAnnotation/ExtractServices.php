@@ -180,6 +180,6 @@ class ExtractServices
 	 */
 	private function renderTemplate(string $template, string $output, array $params): void
 	{
-		file_put_contents($output, sprintf(FileSystem::read($template), ...$params));
+		file_put_contents($output, sprintf(FileSystem::read(__DIR__ . '/templates/' . $template . '.txt'), ...$params));
 	}
 }

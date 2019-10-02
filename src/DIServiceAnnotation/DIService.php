@@ -10,7 +10,7 @@ final class DIService
 {
 
 	/**
-	 * @var array<mixed>
+	 * @var array<string>
 	 */
 	public $params = [];
 
