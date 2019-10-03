@@ -5,7 +5,7 @@ namespace Wavevision\DIServiceAnnotationTests\Services;
 use Wavevision\DIServiceAnnotation\DIService;
 
 /**
- * @DIService
+ * @DIService(generateInject=true)
  */
 class Simple
 {

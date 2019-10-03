@@ -18,14 +18,7 @@ class ExtractServicesTest extends TestCase
 
 	public function testRun(): void
 	{
-		$filesToCreate = explode("\n", trim(FileSystem::read($this->path('Services/.gitignore'))));
-		foreach ($filesToCreate as $key => $file) {
-			$pathname = $this->path('Services', $file);
-			$filesToCreate[$key] = $pathname;
-			if (is_file($pathname)) {
-				FileSystem::delete($pathname);
-			}
-		}
+		$filesToCreate = $this->getFilesToCreate();
 		$servicesDir = __DIR__ . '/Services';
 		$extractServices = new ExtractServices(
 			new AnnotationReader(),
@@ -48,6 +41,22 @@ class ExtractServicesTest extends TestCase
 		foreach ($filesToCreate as $file) {
 			$this->assertFileExists($file);
 		}
+	}
+
+	/**
+	 * @return array<string>
+	 */
+	private function getFilesToCreate(): array
+	{
+		$filesToCreate = explode("\n", trim(FileSystem::read($this->path('Services/.gitignore'))));
+		foreach ($filesToCreate as $key => $file) {
+			$pathname = $this->path('Services', $file);
+			$filesToCreate[$key] = $pathname;
+			if (is_file($pathname)) {
+				FileSystem::delete($pathname);
+			}
+		}
+		return $filesToCreate;
 	}
 
 	private function assertSameConfig(string $config): void
