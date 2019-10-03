@@ -4,6 +4,7 @@ namespace Wavevision\DIServiceAnnotationTests;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Nette\Utils\FileSystem;
+use Nette\Utils\Strings;
 use PHPUnit\Framework\TestCase;
 use Wavevision\DIServiceAnnotation\Configuration;
 use Wavevision\DIServiceAnnotation\ExtractServices;
@@ -40,6 +41,7 @@ class ExtractServicesTest extends TestCase
 		$this->assertSameConfig(self::NESTED_NEON);
 		foreach ($filesToCreate as $file) {
 			$this->assertFileExists($file);
+			$this->assertSameFileContent($file, Strings::replace($file, '/Services/', '/expected/Services/'));
 		}
 	}
 

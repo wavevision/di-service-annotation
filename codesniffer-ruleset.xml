@@ -7,6 +7,9 @@
                 <element key="src" value="Wavevision"/>
                 <element key="tests" value="Wavevision"/>
             </property>
+            <property name="skipDirs" type="array">
+                <element value="expected"/>
+            </property>
         </properties>
     </rule>
 </ruleset>
