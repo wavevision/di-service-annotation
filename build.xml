@@ -99,14 +99,15 @@
         </exec>
     </target>
 
-    <target name="test-no-coverage" description="Run tests without coverage">
+    <target name="test:coverage" description="Run tests with coverage">
         <exec
                 executable="${bin}/phpunit"
                 logoutput="true"
                 passthru="true"
                 checkreturn="true"
         >
-            <arg value="--no-coverage"/>
+            <arg value="--coverage-html=temp/coverage"/>
+            <arg value="--coverage-clover=temp/coverage.xml"/>
         </exec>
     </target>
 
