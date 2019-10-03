@@ -65,13 +65,8 @@ class ExtractServices
 	 */
 	private function saveFile(array $services, string $outputFile): void
 	{
-		$fp = fopen($outputFile, 'w');
-		if ($fp === false) {
-			throw new InvalidState("Unable to open file '$outputFile'.");
-		}
-		fwrite($fp, "# generated file do not modify directly\n");
-		fwrite($fp, "services:");
 		ksort($services);
+		$lines = [];
 		foreach ($services as $service) {
 			$annotation = $service->getAnnotation();
 			$tokenizeResult = $service->getTokenizeResult();
@@ -89,17 +84,16 @@ class ExtractServices
 			if ($annotation->generateInject) {
 				$this->generateInject($className, $file);
 			}
-			fwrite($fp, sprintf("\n\t- %s: %s", self::TOKEN_TO_FACTORY[$tokenId], $className));
+			$lines[] = sprintf("- %s: %s", self::TOKEN_TO_FACTORY[$tokenId], $className);
 			if (count($params) > 0) {
-				fwrite($fp, "\n\t  arguments: [" . implode(', ', $params) . ']');
+				$lines[] = "  arguments: [" . implode(', ', $params) . ']';
 			}
-			fwrite($fp, "\n\t  inject: on");
+			$lines[] = "  inject: on";
 		}
-		if (count($services) === 0) {
-			fwrite($fp, " []");
-		}
-		fwrite($fp, "\n");
-		fclose($fp);
+		FileSystem::write(
+			$outputFile,
+			"# generated file do not modify directly\nservices:\n\t" . implode("\n\t", $lines) . "\n"
+		);
 	}
 
 	/**
