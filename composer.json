@@ -28,6 +28,7 @@
     "phpunit/phpunit": "^8.3",
     "jakub-onderka/php-parallel-lint": "^1.0",
     "phpstan/phpstan": "^0.10",
-    "phing/phing": "^2.16"
+    "phing/phing": "^2.16",
+    "mikey179/vfsStream": "^1.6"
   }
 }

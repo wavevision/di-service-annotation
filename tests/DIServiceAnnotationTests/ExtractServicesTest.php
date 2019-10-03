@@ -8,6 +8,7 @@ use Nette\Utils\Strings;
 use PHPUnit\Framework\TestCase;
 use Wavevision\DIServiceAnnotation\Configuration;
 use Wavevision\DIServiceAnnotation\ExtractServices;
+use Wavevision\DIServiceAnnotation\InvalidState;
 use Wavevision\DIServiceAnnotation\Tokenizer;
 
 class ExtractServicesTest extends TestCase
@@ -43,6 +44,17 @@ class ExtractServicesTest extends TestCase
 			$this->assertFileExists($file);
 			$this->assertSameFileContent($file, Strings::replace($file, '/Services/', '/expected/Services/'));
 		}
+	}
+
+	public function testInvalidState(): void
+	{
+		$this->expectException(InvalidState::class);
+		$extractServices = new ExtractServices(
+			new AnnotationReader(),
+			new Tokenizer(),
+			(new Configuration($this->path('InvalidState'), $this->resultNeon(self::DEFAULT_NEON)))
+		);
+		$extractServices->run();
 	}
 
 	/**
