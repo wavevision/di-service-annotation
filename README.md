@@ -8,7 +8,7 @@ Helper for registering Nette DI services via Doctrine Annotations, factory gener
 
 ## Install
 ```
-composer require wavevision/di-service-annotation
+composer require wavevision/di-service-annotation --dev
 ```
 
 ## Usage
