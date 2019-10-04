@@ -6,6 +6,11 @@
 
 Helper for registering Nette DI services via Doctrine Annotations, factory generator and inject generator.
 
+## Install
+```
+composer require wavevision/di-service-annotation
+```
+
 ## Usage
 
 Running 
