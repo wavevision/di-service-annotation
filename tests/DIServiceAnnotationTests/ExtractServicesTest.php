@@ -2,14 +2,12 @@
 
 namespace Wavevision\DIServiceAnnotationTests;
 
-use Doctrine\Common\Annotations\AnnotationReader;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use PHPUnit\Framework\TestCase;
 use Wavevision\DIServiceAnnotation\Configuration;
 use Wavevision\DIServiceAnnotation\ExtractServices;
 use Wavevision\DIServiceAnnotation\InvalidState;
-use Wavevision\DIServiceAnnotation\Tokenizer;
 
 class ExtractServicesTest extends TestCase
 {
@@ -23,8 +21,6 @@ class ExtractServicesTest extends TestCase
 		$filesToCreate = $this->getFilesToCreate();
 		$servicesDir = __DIR__ . '/Services';
 		$extractServices = new ExtractServices(
-			new AnnotationReader(),
-			new Tokenizer(),
 			(new Configuration($servicesDir, $this->resultNeon(self::DEFAULT_NEON)))
 				->setMask('*.php')
 				->setSourceDirectory($servicesDir)
@@ -50,8 +46,6 @@ class ExtractServicesTest extends TestCase
 	{
 		$this->expectException(InvalidState::class);
 		$extractServices = new ExtractServices(
-			new AnnotationReader(),
-			new Tokenizer(),
 			(new Configuration($this->path('InvalidState'), $this->resultNeon(self::DEFAULT_NEON)))
 		);
 		$extractServices->run();

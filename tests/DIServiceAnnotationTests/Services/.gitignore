@@ -1,4 +1,4 @@
 InjectInterfaceService.php
-Nested/ClassServiceFactory.php
-Nested/InjectClassServiceFactory.php
+Nested/ExampleServiceFactory.php
+Nested/InjectExampleServiceFactory.php
 InjectSimple.php

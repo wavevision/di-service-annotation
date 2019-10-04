@@ -2,8 +2,8 @@
 
 namespace Wavevision\DIServiceAnnotationTests\Services\Nested;
 
-interface ClassServiceFactory
+interface ExampleServiceFactory
 {
 
-	public function create(): ClassService;
+	public function create(): ExampleService;
 }

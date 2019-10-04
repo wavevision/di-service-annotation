@@ -10,31 +10,44 @@ final class Configuration
 	use SmartObject;
 
 	/**
+	 * Where to find DIService annotation
 	 * @var string
 	 */
 	private $sourceDirectory;
 
 	/**
+	 * Mask to find DIService annotation
 	 * @var string
 	 */
 	private $mask;
 
 	/**
+	 * Default neon output file
 	 * @var string
 	 */
 	private $outputFile;
 
 	/**
 	 * @var array<string>
+	 * For splitting services to multiple neon files by namespace
+	 * ```php
+	 * [
+	 *    'RootNamespace\Namespace1' => config1.neon
+	 *    'RootNamespace\Namespace2' => config2.neon
+	 * ]
+	 * ```
+	 * other services will be generated in $outputFile
 	 */
 	private $fileMapping;
 
 	/**
+	 * Mask for generated inject traits
 	 * @var string
 	 */
 	private $injectMask;
 
 	/**
+	 * Mask for generated factories
 	 * @var string
 	 */
 	private $factoryMask;

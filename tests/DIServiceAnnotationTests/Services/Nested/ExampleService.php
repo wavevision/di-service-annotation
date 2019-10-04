@@ -5,9 +5,9 @@ namespace Wavevision\DIServiceAnnotationTests\Services\Nested;
 use Wavevision\DIServiceAnnotation\DIService;
 
 /**
- * @DIService(generateInject=true, generateFactory=true)
+ * @DIService(params={"%wwwDir%"}, generateInject=true, generateFactory=true)
  */
-class ClassService
+class ExampleService
 {
 
 }

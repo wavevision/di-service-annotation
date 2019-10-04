@@ -32,10 +32,10 @@ class ExtractServices
 	 */
 	private $configuration;
 
-	public function __construct(AnnotationReader $annotationReader, Tokenizer $tokenizer, Configuration $configuration)
+	public function __construct(Configuration $configuration)
 	{
-		$this->annotationReader = $annotationReader;
-		$this->tokenizer = $tokenizer;
+		$this->annotationReader = new AnnotationReader();
+		$this->tokenizer = new Tokenizer();
 		$this->configuration = $configuration;
 	}
 
