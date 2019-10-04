@@ -21,4 +21,4 @@ will generate from [class](tests/DIServiceAnnotationTests/Services/Nested/Exampl
 - [inject](tests/DIServiceAnnotationTests/expected/Services/Nested/InjectExampleServiceFactory.php) 
 - [neon config](tests/DIServiceAnnotationTests/expected/nested.neon#L5)
 
-For configuration options see [Configuration properties](src/DIServiceAnnotation/Configuration.php#L7)
+For configuration options see [Configuration properties](src/DIServiceAnnotation/Configuration.php#L7).
