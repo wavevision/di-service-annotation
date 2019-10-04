@@ -30,5 +30,8 @@
     "phpstan/phpstan": "^0.10",
     "phing/phing": "^2.16",
     "mikey179/vfsStream": "^1.6"
+  },
+  "scripts": {
+    "phing": "phing"
   }
 }
