@@ -19,7 +19,7 @@
   },
   "require": {
     "php": ">=7.2",
-    "doctrine/annotations": "^1.8",
+    "doctrine/annotations": "^1.6",
     "nette/utils": "^2.4",
     "nette/finder": "^2.4"
   },

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ff76a1b1b591e3dae0c8a26677d2c2d",
+    "content-hash": "752d956fffca376247b05ca72874ce71",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1788,16 +1788,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.3.5",
+            "version": "8.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "302faed7059fde575cf3403a78c730c5e3a62750"
+                "reference": "57e5e77b62086033528ee1f4063ae03035f57894"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/302faed7059fde575cf3403a78c730c5e3a62750",
-                "reference": "302faed7059fde575cf3403a78c730c5e3a62750",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/57e5e77b62086033528ee1f4063ae03035f57894",
+                "reference": "57e5e77b62086033528ee1f4063ae03035f57894",
                 "shasum": ""
             },
             "require": {
@@ -1841,7 +1841,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.3-dev"
+                    "dev-master": "8.4-dev"
                 }
             },
             "autoload": {
@@ -1867,7 +1867,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-09-14T09:12:03+00:00"
+            "time": "2019-10-04T03:12:25+00:00"
         },
         {
             "name": "psr/container",
@@ -3133,12 +3133,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wavevision/coding-standard.git",
-                "reference": "80e5651b109561c4fc87d765b225c27e6fa69aff"
+                "reference": "7f7d1311807557d1604576b6e5e111ec673f96cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wavevision/coding-standard/zipball/80e5651b109561c4fc87d765b225c27e6fa69aff",
-                "reference": "80e5651b109561c4fc87d765b225c27e6fa69aff",
+                "url": "https://api.github.com/repos/wavevision/coding-standard/zipball/7f7d1311807557d1604576b6e5e111ec673f96cb",
+                "reference": "7f7d1311807557d1604576b6e5e111ec673f96cb",
                 "shasum": ""
             },
             "require": {
@@ -3182,7 +3182,7 @@
             ],
             "description": "The Wavevision PHP coding standard.",
             "homepage": "https://github.com/wavevision/coding-standard",
-            "time": "2019-10-03T14:03:03+00:00"
+            "time": "2019-10-03T15:06:25+00:00"
         },
         {
             "name": "webmozart/assert",
