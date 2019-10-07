@@ -52,6 +52,12 @@ final class Configuration
 	 */
 	private $factoryMask;
 
+	/**
+	 * Mask for generated components
+	 * @var string
+	 */
+	private $componentMask;
+
 	public function __construct(string $sourceDirectory, string $outputFile)
 	{
 		$this->sourceDirectory = $sourceDirectory;
@@ -60,6 +66,7 @@ final class Configuration
 		$this->fileMapping = [];
 		$this->injectMask = 'Inject%s';
 		$this->factoryMask = '%sFactory';
+		$this->componentMask = '%sComponent';
 	}
 
 	public function getSourceDirectory(): string
@@ -131,6 +138,17 @@ final class Configuration
 	public function setFactoryMask(string $factoryMask): self
 	{
 		$this->factoryMask = $factoryMask;
+		return $this;
+	}
+
+	public function getComponentMask(): string
+	{
+		return $this->componentMask;
+	}
+
+	public function setComponentMask(string $componentMask): self
+	{
+		$this->componentMask = $componentMask;
 		return $this;
 	}
 }

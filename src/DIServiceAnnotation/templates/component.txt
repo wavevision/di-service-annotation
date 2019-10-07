@@ -1,0 +1,22 @@
+<?php declare (strict_types = 1);
+
+namespace %1$s;
+
+trait %2$s
+{
+
+	/**
+	 * @var %3$s
+	 */
+	private $%5$s;
+
+	public function inject%6$s(%3$s $%4$s): void
+	{
+		$this->%5$s = $%4$s;
+	}
+
+	public function createComponent%7$s(): %8$s
+	{
+		return $this->%5$s->create();
+	}
+}

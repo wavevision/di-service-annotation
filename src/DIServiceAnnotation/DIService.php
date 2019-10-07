@@ -23,4 +23,9 @@ final class DIService
 	 * @var bool
 	 */
 	public $generateFactory;
+
+	/**
+	 * @var bool
+	 */
+	public $generateComponent;
 }

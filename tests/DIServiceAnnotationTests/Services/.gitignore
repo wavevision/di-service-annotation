@@ -2,3 +2,5 @@ InjectInterfaceService.php
 Nested/ExampleServiceFactory.php
 Nested/InjectExampleServiceFactory.php
 InjectSimple.php
+Text/ControlFactory.php
+Text/TextComponent.php

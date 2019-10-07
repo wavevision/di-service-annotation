@@ -74,7 +74,9 @@ class ExtractServices
 			$params = $annotation->params;
 			$tokenId = $tokenizeResult->getToken();
 			$file = $service->getFile();
-			if ($annotation->generateFactory) {
+			$generateFactory = $annotation->generateFactory || $annotation->generateComponent;
+			$orginalName = $tokenizeResult->getName();
+			if ($generateFactory) {
 				if ($tokenId === T_INTERFACE) {
 					throw new InvalidState('Unable to generate factory for interface.');
 				}
@@ -83,6 +85,9 @@ class ExtractServices
 			}
 			if ($annotation->generateInject) {
 				$this->generateInject($className, $file);
+			}
+			if ($annotation->generateComponent) {
+				$this->generateComponent($className, $file, $orginalName);
 			}
 			$lines[] = sprintf("- %s: %s", self::TOKEN_TO_FACTORY[$tokenId], $className);
 			if (count($params) > 0) {
@@ -129,7 +134,7 @@ class ExtractServices
 
 	private function generateFactory(string $className, SplFileInfo $file): string
 	{
-		$reflectionClass = new ReflectionClass($className);
+		$reflectionClass = $this->getReflection($className);
 		$namespace = $reflectionClass->getNamespaceName();
 		$name = $reflectionClass->getShortName();
 		$factoryName = sprintf($this->configuration->getFactoryMask(), $name);
@@ -152,7 +157,7 @@ class ExtractServices
 
 	private function generateInject(string $className, SplFileInfo $file): void
 	{
-		$reflectionClass = new ReflectionClass($className);
+		$reflectionClass = $this->getReflection($className);
 		$namespace = $reflectionClass->getNamespaceName();
 		$name = $reflectionClass->getShortName();
 		$injectName = sprintf($this->configuration->getInjectMask(), $name);
@@ -169,11 +174,40 @@ class ExtractServices
 		);
 	}
 
+	private function generateComponent(string $className, SplFileInfo $file, string $originalName): void
+	{
+		$reflectionClass = $this->getReflection($className);
+		$namespace = $reflectionClass->getNamespaceName();
+		$namespaceParts = explode('\\', $namespace);
+		$componentName = end($namespaceParts);
+		$maskedComponentName = sprintf($this->configuration->getComponentMask(), $componentName);
+		$type = $reflectionClass->getShortName();
+		$this->renderTemplate(
+			'component',
+			dirname($file->getPathname()) . "/$maskedComponentName.php",
+			[
+				$namespace,
+				$maskedComponentName,
+				$type,
+				lcfirst($type),
+				lcfirst($componentName . $type),
+				$componentName . $type,
+				$componentName,
+				$originalName,
+			]
+		);
+	}
+
 	/**
-	 * @param array<string> $params
+	 * @param array<mixed> $params
 	 */
 	private function renderTemplate(string $template, string $output, array $params): void
 	{
 		file_put_contents($output, sprintf(FileSystem::read(__DIR__ . '/templates/' . $template . '.txt'), ...$params));
+	}
+
+	private function getReflection(string $className): ReflectionClass
+	{
+		return new ReflectionClass($className);
 	}
 }

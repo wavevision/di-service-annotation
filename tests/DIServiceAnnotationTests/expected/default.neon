@@ -5,3 +5,5 @@ services:
 	  inject: on
 	- factory: Wavevision\DIServiceAnnotationTests\Services\Simple
 	  inject: on
+	- implement: Wavevision\DIServiceAnnotationTests\Services\Text\ControlFactory
+	  inject: on
