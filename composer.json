@@ -1,10 +1,20 @@
 {
   "name": "wavevision/di-service-annotation",
+  "description": "Register DI services using annotation for Nette Framework.",
+  "type": "library",
   "license": "MIT",
   "authors": [
     {
+      "name": "Wavevision s.r.o.",
+      "email": "info@wavevision.com"
+    },
+    {
       "name": "Jakub Filla",
-      "email": "jakub.filla@wavevision.cz"
+      "email": "jakub.filla@wavevision.com"
+    },
+    {
+      "name": "Vít Rozsíval",
+      "email": "vit@wavevision.com"
     }
   ],
   "autoload": {
