@@ -38,7 +38,7 @@ class Tokenizer
 		if ($structure === null) {
 			return null;
 		}
-		return new TokenizeResult($matchedToken, $structure, $namespace);
+		return new TokenizeResult((int)$matchedToken, (string)$structure, $namespace);
 	}
 
 	/**
