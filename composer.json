@@ -39,7 +39,7 @@
     "jakub-onderka/php-parallel-lint": "^1.0",
     "phpstan/phpstan": "^0.11",
     "phing/phing": "^2.16",
-    "mikey179/vfsStream": "^1.6"
+    "mikey179/vfsstream": "^1.6"
   },
   "scripts": {
     "phing": "phing"
