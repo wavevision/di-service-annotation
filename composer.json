@@ -29,15 +29,15 @@
   },
   "require": {
     "php": ">=7.2",
-    "doctrine/annotations": "^1.6",
-    "nette/utils": "^2.4",
-    "nette/finder": "^2.4"
+    "doctrine/annotations": "^1.8",
+    "nette/utils": "^3.0",
+    "nette/finder": "^2.5"
   },
   "require-dev": {
     "wavevision/coding-standard": "dev-master",
     "phpunit/phpunit": "^8.3",
     "jakub-onderka/php-parallel-lint": "^1.0",
-    "phpstan/phpstan": "^0.10",
+    "phpstan/phpstan": "^0.11",
     "phing/phing": "^2.16",
     "mikey179/vfsStream": "^1.6"
   },
