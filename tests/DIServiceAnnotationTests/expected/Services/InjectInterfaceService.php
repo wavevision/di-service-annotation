@@ -14,4 +14,5 @@ trait InjectInterfaceService
 	{
 		$this->interfaceService = $interfaceService;
 	}
+
 }

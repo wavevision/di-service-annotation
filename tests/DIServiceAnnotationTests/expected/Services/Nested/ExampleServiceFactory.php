@@ -6,4 +6,5 @@ interface ExampleServiceFactory
 {
 
 	public function create(): ExampleService;
+
 }

@@ -14,4 +14,5 @@ trait InjectSimple
 	{
 		$this->simple = $simple;
 	}
+
 }

@@ -30,8 +30,8 @@
   "require": {
     "php": ">=7.2",
     "doctrine/annotations": "^1.8",
-    "nette/utils": "^3.0",
-    "nette/finder": "^2.5"
+    "nette/finder": "^2.5",
+    "wavevision/utils": "^1.1"
   },
   "require-dev": {
     "jakub-onderka/php-parallel-lint": "^1.0",

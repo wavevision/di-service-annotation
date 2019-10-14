@@ -6,4 +6,5 @@ interface %2$s
 {
 
 	public function create(): %3$s;
+
 }

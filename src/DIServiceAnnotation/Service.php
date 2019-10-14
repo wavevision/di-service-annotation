@@ -4,6 +4,7 @@ namespace Wavevision\DIServiceAnnotation;
 
 use Nette\SmartObject;
 use SplFileInfo;
+use Wavevision\Utils\Tokenizer\TokenizeResult;
 
 class Service
 {
@@ -46,4 +47,5 @@ class Service
 	{
 		return $this->file;
 	}
+
 }

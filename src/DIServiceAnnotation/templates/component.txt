@@ -19,4 +19,5 @@ trait %2$s
 	{
 		return $this->%5$s->create();
 	}
+
 }

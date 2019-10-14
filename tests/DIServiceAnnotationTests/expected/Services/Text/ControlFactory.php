@@ -6,4 +6,5 @@ interface ControlFactory
 {
 
 	public function create(): Control;
+
 }

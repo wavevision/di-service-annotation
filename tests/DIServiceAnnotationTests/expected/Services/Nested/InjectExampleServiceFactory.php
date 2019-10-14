@@ -14,4 +14,5 @@ trait InjectExampleServiceFactory
 	{
 		$this->exampleServiceFactory = $exampleServiceFactory;
 	}
+
 }

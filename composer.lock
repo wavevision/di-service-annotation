@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91b7b01489bd3546b7df92ac4019e152",
+    "content-hash": "16ebd547eb2a37aef615be7cb7e2807e",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -135,6 +135,47 @@
                 "php"
             ],
             "time": "2019-07-30T19:33:28+00:00"
+        },
+        {
+            "name": "flow/jsonpath",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FlowCommunications/JSONPath.git",
+                "reference": "f0222818d5c938e4ab668ab2e2c079bd51a27112"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FlowCommunications/JSONPath/zipball/f0222818d5c938e4ab668ab2e2c079bd51a27112",
+                "reference": "f0222818d5c938e4ab668ab2e2c079bd51a27112",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "peekmo/jsonpath": "dev-master",
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Flow\\JSONPath": "src/",
+                    "Flow\\JSONPath\\Test": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen Frank",
+                    "email": "stephen@flowsa.com"
+                }
+            ],
+            "description": "JSONPath implementation for parsing, searching and flattening arrays",
+            "time": "2018-03-04T16:39:47+00:00"
         },
         {
             "name": "nette/finder",
@@ -273,6 +314,65 @@
                 "validation"
             ],
             "time": "2019-03-22T01:00:30+00:00"
+        },
+        {
+            "name": "wavevision/utils",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wavevision/utils.git",
+                "reference": "4e331af85150f7ae00e0a51e5bb1bb9264e5c5ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wavevision/utils/zipball/4e331af85150f7ae00e0a51e5bb1bb9264e5c5ee",
+                "reference": "4e331af85150f7ae00e0a51e5bb1bb9264e5c5ee",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "flow/jsonpath": "^0.4.0",
+                "nette/finder": "^2.5",
+                "nette/utils": "^3.0",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "^1.0",
+                "mikey179/vfsstream": "^1.6",
+                "phing/phing": "^2.16",
+                "php-coveralls/php-coveralls": "^2.1",
+                "php-mock/php-mock-mockery": "^1.3",
+                "php-mock/php-mock-phpunit": "^2.4",
+                "phpstan/phpstan": "^0.10",
+                "phpunit/phpunit": "^8.3",
+                "wavevision/coding-standard": "^1.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wavevision\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wavevision s.r.o.",
+                    "email": "info@wavevision.com"
+                },
+                {
+                    "name": "Jakub Filla",
+                    "email": "jakub.filla@wavevision.com"
+                },
+                {
+                    "name": "Vít Rozsíval",
+                    "email": "vit@wavevision.com"
+                }
+            ],
+            "description": "Useful PHP utilities and helpers.",
+            "time": "2019-10-11T13:20:03+00:00"
         }
     ],
     "packages-dev": [
@@ -3703,16 +3803,16 @@
         },
         {
             "name": "wavevision/coding-standard",
-            "version": "1.1.0",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wavevision/coding-standard.git",
-                "reference": "9dfebe4fa0053ed0e53e5938cafaa9be78dcde55"
+                "reference": "abf1a5a4b6fee899a7f784eee76afa1a0fe4f062"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wavevision/coding-standard/zipball/9dfebe4fa0053ed0e53e5938cafaa9be78dcde55",
-                "reference": "9dfebe4fa0053ed0e53e5938cafaa9be78dcde55",
+                "url": "https://api.github.com/repos/wavevision/coding-standard/zipball/abf1a5a4b6fee899a7f784eee76afa1a0fe4f062",
+                "reference": "abf1a5a4b6fee899a7f784eee76afa1a0fe4f062",
                 "shasum": ""
             },
             "require": {
@@ -3757,7 +3857,7 @@
             ],
             "description": "The Wavevision PHP coding standard.",
             "homepage": "https://github.com/wavevision/coding-standard",
-            "time": "2019-10-11T12:31:48+00:00"
+            "time": "2019-10-14T11:34:28+00:00"
         },
         {
             "name": "webmozart/assert",

@@ -151,4 +151,5 @@ final class Configuration
 		$this->componentMask = $componentMask;
 		return $this;
 	}
+
 }

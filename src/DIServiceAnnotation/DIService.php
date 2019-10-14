@@ -28,4 +28,5 @@ final class DIService
 	 * @var bool
 	 */
 	public $generateComponent;
+
 }

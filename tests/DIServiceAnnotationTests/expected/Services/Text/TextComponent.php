@@ -19,4 +19,5 @@ trait TextComponent
 	{
 		return $this->textControlFactory->create();
 	}
+
 }

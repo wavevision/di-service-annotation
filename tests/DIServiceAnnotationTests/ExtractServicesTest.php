@@ -93,4 +93,5 @@ class ExtractServicesTest extends TestCase
 		array_push($p, ...$parts);
 		return join('/', $p);
 	}
+
 }

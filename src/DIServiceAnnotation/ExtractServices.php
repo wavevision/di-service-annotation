@@ -8,6 +8,7 @@ use Nette\Utils\Finder;
 use Nette\Utils\Strings;
 use ReflectionClass;
 use SplFileInfo;
+use Wavevision\Utils\Tokenizer\Tokenizer;
 
 class ExtractServices
 {
@@ -210,4 +211,5 @@ class ExtractServices
 	{
 		return new ReflectionClass($className);
 	}
+
 }
