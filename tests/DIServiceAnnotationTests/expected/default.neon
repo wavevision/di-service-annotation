@@ -1,5 +1,7 @@
 # generated file do not modify directly
 services:
+	- factory: Wavevision\DIServiceAnnotationTests\Services\ExistingInject
+	  inject: on
 	- implement: Wavevision\DIServiceAnnotationTests\Services\InterfaceService
 	  arguments: [%wwwDir%, @name]
 	  inject: on

@@ -19,6 +19,7 @@ class ExtractServicesTest extends TestCase
 	public function testRun(): void
 	{
 		$filesToCreate = $this->getFilesToCreate();
+		$filesToCreate[] = $this->path('Services', 'InjectExistingInject.php');
 		$servicesDir = __DIR__ . '/Services';
 		$extractServices = new ExtractServices(
 			(new Configuration($servicesDir, $this->resultNeon(self::DEFAULT_NEON)))
@@ -32,13 +33,14 @@ class ExtractServicesTest extends TestCase
 						'Wavevision\DIServiceAnnotationTests\Services\Nested' => $this->resultNeon(self::NESTED_NEON),
 					]
 				)
+				->setComponentMask('%sComponent')
 		);
 		$extractServices->run();
 		$this->assertSameConfig(self::DEFAULT_NEON);
 		$this->assertSameConfig(self::NESTED_NEON);
 		foreach ($filesToCreate as $file) {
 			$this->assertFileExists($file);
-			$this->assertSameFileContent($file, Strings::replace($file, '/Services/', '/expected/Services/'));
+			$this->assertSameFileContent(Strings::replace($file, '/Services/', '/expected/Services/'), $file);
 		}
 	}
 

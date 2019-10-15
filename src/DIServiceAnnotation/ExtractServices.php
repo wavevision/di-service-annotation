@@ -162,17 +162,20 @@ class ExtractServices
 		$namespace = $reflectionClass->getNamespaceName();
 		$name = $reflectionClass->getShortName();
 		$injectName = sprintf($this->configuration->getInjectMask(), $name);
-		$this->renderTemplate(
-			'inject',
-			dirname($file->getPathname()) . "/$injectName.php",
-			[
-				$namespace,
-				$injectName,
-				$name,
-				lcfirst($injectName),
-				lcfirst($name),
-			]
-		);
+		$outputFile = dirname($file->getPathname()) . "/$injectName.php";
+		if (!is_file($outputFile)) {
+			$this->renderTemplate(
+				'inject',
+				$outputFile,
+				[
+					$namespace,
+					$injectName,
+					$name,
+					lcfirst($injectName),
+					lcfirst($name),
+				]
+			);
+		}
 	}
 
 	private function generateComponent(string $className, SplFileInfo $file, string $originalName): void
