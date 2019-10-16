@@ -6,7 +6,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use Nette\StaticClass;
 use Wavevision\Utils\Path;
 
-class Bootstrap
+final class Bootstrap
 {
 
 	use StaticClass;
