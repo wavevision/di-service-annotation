@@ -2,6 +2,7 @@
 
 namespace Wavevision\DIServiceAnnotation;
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Nette\StaticClass;
 use Wavevision\Utils\Path;
 
@@ -22,6 +23,7 @@ class Bootstrap
 	public static function boot(string $rootDir, array $mappings): void
 	{
 		self::$rootDir = $rootDir;
+		AnnotationRegistry::registerLoader('class_exists');
 		foreach ($mappings as $source => $output) {
 			(new ExtractServices(new Configuration(self::fromRoot($source), self::fromRoot($output))))->run();
 		}
