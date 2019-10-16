@@ -8,6 +8,7 @@ use Nette\Utils\Finder;
 use Nette\Utils\Strings;
 use ReflectionClass;
 use SplFileInfo;
+use Wavevision\Utils\Arrays;
 use Wavevision\Utils\Tokenizer\Tokenizer;
 
 class ExtractServices
@@ -72,7 +73,6 @@ class ExtractServices
 			$annotation = $service->getAnnotation();
 			$tokenizeResult = $service->getTokenizeResult();
 			$className = $tokenizeResult->getFullyQualifiedName();
-			$params = $annotation->params;
 			$tokenId = $tokenizeResult->getToken();
 			$file = $service->getFile();
 			$generateFactory = $annotation->generateFactory || $annotation->generateComponent;
@@ -90,11 +90,7 @@ class ExtractServices
 			if ($annotation->generateComponent) {
 				$this->generateComponent($className, $file, $orginalName);
 			}
-			$lines[] = sprintf("- %s: %s", self::TOKEN_TO_FACTORY[$tokenId], $className);
-			if (count($params) > 0) {
-				$lines[] = "  arguments: [" . implode(', ', $params) . ']';
-			}
-			$lines[] = "  inject: on";
+			$lines = $this->generateConfig($annotation, $className, $tokenId, $lines);
 		}
 		FileSystem::write(
 			$outputFile,
@@ -131,6 +127,40 @@ class ExtractServices
 			return $annotation;
 		}
 		return null;
+	}
+
+	/**
+	 * @param DIService $annotation
+	 * @param string $className
+	 * @param int $token
+	 * @param string[] $lines
+	 * @return string[]
+	 */
+	private function generateConfig(DIService $annotation, string $className, int $token, array $lines): array
+	{
+		$params = $annotation->params;
+		$tags = $annotation->tags;
+		$lines[] = sprintf("- %s: %s", self::TOKEN_TO_FACTORY[$token], $className);
+		if (!Arrays::isEmpty($params)) {
+			$lines[] = $this->generateAttributes('arguments', $params);
+		}
+		if (!Arrays::isEmpty($tags)) {
+			$lines[] = $this->generateAttributes('tags', $tags);
+		}
+		if ($annotation->inject) {
+			$lines[] = "  inject: on";
+		}
+		return $lines;
+	}
+
+	/**
+	 * @param string $name
+	 * @param string[] $attributes
+	 * @return string
+	 */
+	private function generateAttributes(string $name, array $attributes): string
+	{
+		return "  $name: [" . implode(', ', $attributes) . ']';
 	}
 
 	private function generateFactory(string $className, SplFileInfo $file): string
