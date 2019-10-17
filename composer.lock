@@ -317,16 +317,16 @@
         },
         {
             "name": "wavevision/utils",
-            "version": "1.1.0",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wavevision/utils.git",
-                "reference": "4e331af85150f7ae00e0a51e5bb1bb9264e5c5ee"
+                "reference": "48947bcbdd84885e702637a266dccdcf7f089cab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wavevision/utils/zipball/4e331af85150f7ae00e0a51e5bb1bb9264e5c5ee",
-                "reference": "4e331af85150f7ae00e0a51e5bb1bb9264e5c5ee",
+                "url": "https://api.github.com/repos/wavevision/utils/zipball/48947bcbdd84885e702637a266dccdcf7f089cab",
+                "reference": "48947bcbdd84885e702637a266dccdcf7f089cab",
                 "shasum": ""
             },
             "require": {
@@ -372,7 +372,7 @@
                 }
             ],
             "description": "Useful PHP utilities and helpers.",
-            "time": "2019-10-11T13:20:03+00:00"
+            "time": "2019-10-15T16:12:09+00:00"
         }
     ],
     "packages-dev": [

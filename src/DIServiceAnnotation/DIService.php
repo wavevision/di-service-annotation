@@ -10,9 +10,19 @@ final class DIService
 {
 
 	/**
-	 * @var array<string>
+	 * @var bool
+	 */
+	public $inject = true;
+
+	/**
+	 * @var string[]
 	 */
 	public $params = [];
+
+	/**
+	 * @var string[]
+	 */
+	public $tags = [];
 
 	/**
 	 * @var bool
