@@ -17,9 +17,9 @@ Running
 
 ```php
 use Wavevision\DIServiceAnnotation\Configuration;
-use Wavevision\DIServiceAnnotation\ExtractServices;
+use Wavevision\DIServiceAnnotation\Runner;
 
-(new ExtractServices(new Configuration('sourceDirectory', 'services.neon')))->run()
+Runner::run(new Configuration('sourceDirectory', 'services.neon'));
 ```
 will generate from [class](tests/DIServiceAnnotationTests/Services/Nested/ExampleService.php) following:
 - [factory](tests/DIServiceAnnotationTests/expected/Services/Nested/ExampleServiceFactory.php)
