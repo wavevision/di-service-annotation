@@ -4,4 +4,5 @@ services:
 	  inject: on
 	- implement: Wavevision\DIServiceAnnotationTests\Services\Nested\ExampleServiceFactory
 	  arguments: [%wwwDir%]
+	  tags: [t1]
 	  inject: on

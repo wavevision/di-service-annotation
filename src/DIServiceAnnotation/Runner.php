@@ -10,10 +10,7 @@ final class Runner
 
 	use StaticClass;
 
-	/**
-	 * @param Configuration[] $configurations
-	 */
-	public static function run(array ...$configurations): void
+	public static function run(Configuration ...$configurations): void
 	{
 		AnnotationRegistry::registerLoader('class_exists');
 		foreach ($configurations as $configuration) {

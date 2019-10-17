@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Wavevision\DIServiceAnnotation\Configuration;
 use Wavevision\DIServiceAnnotation\ExtractServices;
 use Wavevision\DIServiceAnnotation\InvalidState;
+use Wavevision\Utils\Path;
 
 class ExtractServicesTest extends TestCase
 {
@@ -93,7 +94,7 @@ class ExtractServicesTest extends TestCase
 	{
 		$p = [__DIR__];
 		array_push($p, ...$parts);
-		return join('/', $p);
+		return Path::join(...$p);
 	}
 
 }
