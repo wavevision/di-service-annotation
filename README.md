@@ -13,7 +13,23 @@ composer require --dev wavevision/di-service-annotation
 
 ## Usage
 
-Running 
+### Annotate your service
+
+```php
+use Wavevision\DIServiceAnnotation\DIService;
+
+/**
+ * @DIService(params={"%wwwDir%"}, generateInject=true, generateFactory=true)
+ */
+class ExampleService
+{
+
+}
+```
+
+### Create runner script
+
+For example `bin/extract-services.php`
 
 ```php
 use Wavevision\DIServiceAnnotation\Configuration;
@@ -21,9 +37,21 @@ use Wavevision\DIServiceAnnotation\Runner;
 
 Runner::run(new Configuration('sourceDirectory', 'services.neon'));
 ```
+
+Running this script with `php bin/extract-services.php`
+
 will generate from [class](tests/DIServiceAnnotationTests/Services/Nested/ExampleService.php) following:
 - [factory](tests/DIServiceAnnotationTests/expected/Services/Nested/ExampleServiceFactory.php)
 - [inject](tests/DIServiceAnnotationTests/expected/Services/Nested/InjectExampleServiceFactory.php) 
 - [neon config](tests/DIServiceAnnotationTests/expected/nested.neon#L5)
+
+### Annotation options
+
+- `enableInject: bool` – will add `inject: on` to generated service config (default `true`)
+- `generateComponent: bool` – will generate `<className>Component` trait, with factory and `createComponent` implemented
+- `generateFactory: bool` – will generate `<className>Factory` interface with `create` function
+- `generateInject: bool` – will generate `Inject<className>` trait with property `$<className>` and `inject<ClassName>` function implemented
+- `params: string[]` – list of DI parameters to be passed to service constructor
+- `tags: string[]` – list of tags to be used with the service in generated config
 
 For configuration options see [Configuration properties](src/DIServiceAnnotation/Configuration.php#L7).

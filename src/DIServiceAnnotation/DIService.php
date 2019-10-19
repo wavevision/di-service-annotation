@@ -12,7 +12,22 @@ final class DIService
 	/**
 	 * @var bool
 	 */
-	public $inject = true;
+	public $enableInject = true;
+
+	/**
+	 * @var bool
+	 */
+	public $generateComponent;
+
+	/**
+	 * @var bool
+	 */
+	public $generateFactory;
+
+	/**
+	 * @var bool
+	 */
+	public $generateInject;
 
 	/**
 	 * @var string[]
@@ -23,20 +38,5 @@ final class DIService
 	 * @var string[]
 	 */
 	public $tags = [];
-
-	/**
-	 * @var bool
-	 */
-	public $generateInject;
-
-	/**
-	 * @var bool
-	 */
-	public $generateFactory;
-
-	/**
-	 * @var bool
-	 */
-	public $generateComponent;
 
 }

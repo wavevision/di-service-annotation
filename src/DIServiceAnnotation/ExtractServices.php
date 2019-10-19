@@ -147,7 +147,7 @@ class ExtractServices
 		if (!Arrays::isEmpty($tags)) {
 			$lines[] = $this->generateAttributes('tags', $tags);
 		}
-		if ($annotation->inject) {
+		if ($annotation->enableInject) {
 			$lines[] = "  inject: on";
 		}
 		return $lines;
