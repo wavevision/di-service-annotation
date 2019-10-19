@@ -48,9 +48,9 @@ will generate from [class](tests/DIServiceAnnotationTests/Services/Nested/Exampl
 ### Annotation options
 
 - `enableInject: bool` – will add `inject: on` to generated service config (default `true`)
-- `generateComponent: bool` – will generate `<className>Component` trait, with factory and `createComponent` implemented
-- `generateFactory: bool` – will generate `<className>Factory` interface with `create` function
-- `generateInject: bool` – will generate `Inject<className>` trait with property `$<className>` and `inject<ClassName>` function implemented
+- `generateComponent: bool` – will generate `<className>Component` trait, with factory and `createComponent<ClassName>` implemented
+- `generateFactory: bool` – will generate `<ClassName>Factory` interface with `create` function
+- `generateInject: bool` – will generate `Inject<ClassName>` trait with property `$<className>` and `inject<ClassName>` function implemented
 - `params: string[]` – list of DI parameters to be passed to service constructor
 - `tags: string[]` – list of tags to be used with the service in generated config
 
