@@ -20,4 +20,9 @@ trait %2$s
 		return $this->%5$s->create();
 	}
 
+	public function get%7$sComponent(): %8$s
+	{
+		return $this['%9$s'];
+	}
+
 }

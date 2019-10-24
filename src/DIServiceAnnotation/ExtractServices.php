@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare (strict_types = 1);
 
 namespace Wavevision\DIServiceAnnotation;
 
@@ -214,6 +214,9 @@ class ExtractServices
 		$namespace = $reflectionClass->getNamespaceName();
 		$namespaceParts = explode('\\', $namespace);
 		$componentName = end($namespaceParts);
+		if ($componentName === false) {
+			throw new InvalidState("Unable to get component name from namespace '$namespace'.");
+		}
 		$maskedComponentName = sprintf($this->configuration->getComponentMask(), $componentName);
 		$type = $reflectionClass->getShortName();
 		$this->renderTemplate(
@@ -228,6 +231,7 @@ class ExtractServices
 				$componentName . $type,
 				$componentName,
 				$originalName,
+				lcfirst($componentName),
 			]
 		);
 	}

@@ -20,4 +20,9 @@ trait TextComponent
 		return $this->textControlFactory->create();
 	}
 
+	public function getTextComponent(): Control
+	{
+		return $this['text'];
+	}
+
 }
