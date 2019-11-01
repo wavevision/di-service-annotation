@@ -8,7 +8,7 @@ trait InjectInterfaceService
 	/**
 	 * @var InterfaceService
 	 */
-	private $interfaceService;
+	protected $interfaceService;
 
 	public function injectInterfaceService(InterfaceService $interfaceService): void
 	{

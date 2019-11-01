@@ -8,7 +8,7 @@ trait %2$s
 	/**
 	 * @var %3$s
 	 */
-	private $%5$s;
+	protected $%5$s;
 
 	public function %4$s(%3$s $%5$s): void
 	{

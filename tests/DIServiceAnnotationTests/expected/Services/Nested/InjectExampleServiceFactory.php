@@ -8,7 +8,7 @@ trait InjectExampleServiceFactory
 	/**
 	 * @var ExampleServiceFactory
 	 */
-	private $exampleServiceFactory;
+	protected $exampleServiceFactory;
 
 	public function injectExampleServiceFactory(ExampleServiceFactory $exampleServiceFactory): void
 	{

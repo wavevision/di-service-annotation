@@ -8,7 +8,7 @@ trait InjectSimple
 	/**
 	 * @var Simple
 	 */
-	private $simple;
+	protected $simple;
 
 	public function injectSimple(Simple $simple): void
 	{
