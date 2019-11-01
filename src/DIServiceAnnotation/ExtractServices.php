@@ -212,11 +212,7 @@ class ExtractServices
 	{
 		$reflectionClass = $this->getReflection($className);
 		$namespace = $reflectionClass->getNamespaceName();
-		$namespaceParts = explode('\\', $namespace);
-		$componentName = end($namespaceParts);
-		if ($componentName === false) {
-			throw new InvalidState("Unable to get component name from namespace '$namespace'.");
-		}
+		$componentName = Arrays::lastItem(explode('\\', $namespace));
 		$maskedComponentName = sprintf($this->configuration->getComponentMask(), $componentName);
 		$type = $reflectionClass->getShortName();
 		$this->renderTemplate(
@@ -246,7 +242,13 @@ class ExtractServices
 
 	private function getReflection(string $className): ReflectionClass
 	{
-		return new ReflectionClass($className);
+		$reflection = new ReflectionClass($className);
+		if ($reflection->getNamespaceName() === '') {
+			throw new InvalidState(
+				sprintf("Namespace is missing for '%s'. At least one level namespace is required.", $className)
+			);
+		}
+		return $reflection;
 	}
 
 }

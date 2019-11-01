@@ -4,6 +4,7 @@ namespace Wavevision\DIServiceAnnotationTests;
 
 use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
+use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Wavevision\DIServiceAnnotation\Configuration;
 use Wavevision\DIServiceAnnotation\ExtractServices;
@@ -50,6 +51,31 @@ class ExtractServicesTest extends TestCase
 		$this->expectException(InvalidState::class);
 		$extractServices = new ExtractServices(
 			(new Configuration($this->path('InvalidState'), $this->resultNeon(self::DEFAULT_NEON)))
+		);
+		$extractServices->run();
+	}
+
+	public function testNoNamespace(): void
+	{
+		vfsStream::setup('r');
+		$servicesDirectory = vfsStream::url('r/d');
+		FileSystem::createDir($servicesDirectory);
+		$component = vfsStream::url('r/d/Component.php');
+		FileSystem::write(
+			$component,
+			'<?php 
+			use Wavevision\DIServiceAnnotation\DIService;
+			/**
+			 * @DIService(generateComponent=true)
+			 */
+			 class Control {
+			 }'
+		);
+		include $component;
+		$this->expectException(InvalidState::class);
+		$this->expectExceptionMessage("Namespace is missing for 'Control'. At least one level namespace is required.");
+		$extractServices = new ExtractServices(
+			(new Configuration($servicesDirectory, ''))
 		);
 		$extractServices->run();
 	}
