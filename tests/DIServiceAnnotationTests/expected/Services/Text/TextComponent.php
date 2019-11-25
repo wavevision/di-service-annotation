@@ -2,6 +2,8 @@
 
 namespace Wavevision\DIServiceAnnotationTests\Services\Text;
 
+use Nette\ComponentModel\IComponent;
+
 trait TextComponent
 {
 
@@ -20,7 +22,10 @@ trait TextComponent
 		return $this->textControlFactory->create();
 	}
 
-	public function getTextComponent(): Control
+	/**
+	 * @return Control
+	 */
+	public function getTextComponent(): IComponent
 	{
 		return $this['text'];
 	}

@@ -2,6 +2,8 @@
 
 namespace %1$s;
 
+use Nette\ComponentModel\IComponent;
+
 trait %2$s
 {
 
@@ -20,7 +22,10 @@ trait %2$s
 		return $this->%5$s->create();
 	}
 
-	public function get%7$sComponent(): %8$s
+	/**
+	 * @return %8$s
+	 */
+	public function get%7$sComponent(): IComponent
 	{
 		return $this['%9$s'];
 	}

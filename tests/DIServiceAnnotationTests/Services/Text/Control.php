@@ -7,7 +7,7 @@ use Wavevision\DIServiceAnnotation\DIService;
 /**
  * @DIService(generateComponent=true)
  */
-class Control
+class Control extends \Nette\Application\UI\Control
 {
 
 }
