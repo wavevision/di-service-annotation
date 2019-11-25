@@ -23,7 +23,7 @@ trait TextComponent
 	}
 
 	/**
-	 * @return Control
+	 * @return Control|IComponent
 	 */
 	public function getTextComponent(): IComponent
 	{

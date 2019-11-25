@@ -23,7 +23,7 @@ trait %2$s
 	}
 
 	/**
-	 * @return %8$s
+	 * @return %8$s|IComponent
 	 */
 	public function get%7$sComponent(): IComponent
 	{
