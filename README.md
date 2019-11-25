@@ -11,6 +11,8 @@ Helper for registering Nette DI services via Doctrine Annotations, factory gener
 composer require --dev wavevision/di-service-annotation
 ```
 
+> **Note:** Install [phpstan-nette](https://github.com/phpstan/phpstan-nette) if you need support for strict return types.
+
 ## Usage
 
 ### Annotate your service
