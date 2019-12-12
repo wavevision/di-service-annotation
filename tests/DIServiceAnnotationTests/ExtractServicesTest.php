@@ -32,7 +32,6 @@ class ExtractServicesTest extends TestCase
 			->setMask('*.php')
 			->setSourceDirectory($servicesDir)
 			->setOutputFile($this->resultNeon(self::DEFAULT_NEON))
-			->setInjectGenerator(new DefaultInject('Inject%s', $templates->string('inject.txt')))
 			->setFactoryGenerator(new DefaultFactory('%sFactory', $templates->string('factory.txt')))
 			->setComponentFactory(new DefaultComponent('%sComponent', $templates->string('component.txt')))
 			->setFileMapping(
@@ -40,6 +39,7 @@ class ExtractServicesTest extends TestCase
 					'Wavevision\DIServiceAnnotationTests\Services\Nested' => $this->resultNeon(self::NESTED_NEON),
 				]
 			);
+		$configuration->setInjectGenerator($configuration->getInjectGenerator());
 		/** @var DefaultGenerator $injectGenerator */
 		$injectGenerator = $configuration->getInjectGenerator();
 		$injectGenerator->setMask($injectGenerator->getMask());

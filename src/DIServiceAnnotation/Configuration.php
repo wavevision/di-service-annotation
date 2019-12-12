@@ -56,7 +56,7 @@ final class Configuration
 		$this->outputFile = $outputFile;
 		$this->mask = '*.php';
 		$this->fileMapping = [];
-		$templates = Path::create(__DIR__, 'templates');
+		$templates = Path::create(__DIR__, 'Generators', 'templates');
 		$this->injectGenerator = new DefaultInject('Inject%s', $templates->string('inject.txt'), $regenerate);
 		$this->factoryGenerator = new DefaultFactory('%sFactory', $templates->string('factory.txt'), $regenerate);
 		$this->componentFactory = new DefaultComponent('%sComponent', $templates->string('component.txt'), $regenerate);
