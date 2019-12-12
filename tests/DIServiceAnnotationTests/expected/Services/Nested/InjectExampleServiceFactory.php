@@ -5,10 +5,7 @@ namespace Wavevision\DIServiceAnnotationTests\Services\Nested;
 trait InjectExampleServiceFactory
 {
 
-	/**
-	 * @var ExampleServiceFactory
-	 */
-	protected $exampleServiceFactory;
+	protected ExampleServiceFactory $exampleServiceFactory;
 
 	public function injectExampleServiceFactory(ExampleServiceFactory $exampleServiceFactory): void
 	{

@@ -5,10 +5,7 @@ namespace %1$s;
 trait %2$s
 {
 
-	/**
-	 * @var %3$s
-	 */
-	protected $%5$s;
+	protected %3$s $%5$s;
 
 	public function %4$s(%3$s $%5$s): void
 	{

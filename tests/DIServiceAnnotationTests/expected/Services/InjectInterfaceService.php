@@ -5,10 +5,7 @@ namespace Wavevision\DIServiceAnnotationTests\Services;
 trait InjectInterfaceService
 {
 
-	/**
-	 * @var InterfaceService
-	 */
-	protected $interfaceService;
+	protected InterfaceService $interfaceService;
 
 	public function injectInterfaceService(InterfaceService $interfaceService): void
 	{

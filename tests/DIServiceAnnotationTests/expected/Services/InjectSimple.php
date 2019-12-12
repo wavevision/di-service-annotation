@@ -5,10 +5,7 @@ namespace Wavevision\DIServiceAnnotationTests\Services;
 trait InjectSimple
 {
 
-	/**
-	 * @var Simple
-	 */
-	protected $simple;
+	protected Simple $simple;
 
 	public function injectSimple(Simple $simple): void
 	{

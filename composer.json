@@ -36,7 +36,7 @@
   "require-dev": {
     "jakub-onderka/php-parallel-lint": "^1.0",
     "mikey179/vfsstream": "^1.6",
-    "phing/phing": "^2.16",
+    "phing/phing": "^3.0.0a3",
     "php-coveralls/php-coveralls": "^2.1",
     "phpstan/phpstan": "^0.11",
     "phpunit/phpunit": "^8.3",

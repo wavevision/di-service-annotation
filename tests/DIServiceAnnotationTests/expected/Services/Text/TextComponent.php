@@ -5,10 +5,7 @@ namespace Wavevision\DIServiceAnnotationTests\Services\Text;
 trait TextComponent
 {
 
-	/**
-	 * @var ControlFactory
-	 */
-	private $textControlFactory;
+	private ControlFactory $textControlFactory;
 
 	public function injectTextControlFactory(ControlFactory $controlFactory): void
 	{
