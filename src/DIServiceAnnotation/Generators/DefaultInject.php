@@ -13,11 +13,11 @@ class DefaultInject extends DefaultGenerator implements Inject
 		$namespace = $reflectionClass->getNamespaceName();
 		$name = $reflectionClass->getShortName();
 		$injectName = sprintf($this->mask, $name);
-		$outputFile = dirname($file->getPathname()) . "/$injectName.php";
-		if (!is_file($outputFile)) {
+		$filename = dirname($file->getPathname()) . "/$injectName.php";
+		if ($this->shouldGenerate($filename)) {
 			Helpers::renderTemplate(
 				$this->template,
-				$outputFile,
+				$filename,
 				[
 					$namespace,
 					$injectName,

@@ -15,21 +15,24 @@ class DefaultComponent extends DefaultGenerator implements Component
 		$componentName = Arrays::lastItem(explode('\\', $namespace));
 		$maskedComponentName = sprintf($this->mask, $componentName);
 		$type = $reflectionClass->getShortName();
-		Helpers::renderTemplate(
-			$this->template,
-			dirname($file->getPathname()) . "/$maskedComponentName.php",
-			[
-				$namespace,
-				$maskedComponentName,
-				$type,
-				lcfirst($type),
-				lcfirst($componentName . $type),
-				$componentName . $type,
-				$componentName,
-				$originalName,
-				lcfirst($componentName),
-			]
-		);
+		$filename = dirname($file->getPathname()) . "/$maskedComponentName.php";
+		if ($this->shouldGenerate($filename)) {
+			Helpers::renderTemplate(
+				$this->template,
+				$filename,
+				[
+					$namespace,
+					$maskedComponentName,
+					$type,
+					lcfirst($type),
+					lcfirst($componentName . $type),
+					$componentName . $type,
+					$componentName,
+					$originalName,
+					lcfirst($componentName),
+				]
+			);
+		}
 	}
 
 }

@@ -18,21 +18,18 @@ final class Configuration
 
 	/**
 	 * Where to find DIService annotation
-	 * @var string
 	 */
-	private $sourceDirectory;
+	private string $sourceDirectory;
 
 	/**
 	 * Mask to find DIService annotation
-	 * @var string
 	 */
-	private $mask;
+	private string $mask;
 
 	/**
 	 * Default neon output file
-	 * @var string
 	 */
-	private $outputFile;
+	private string $outputFile;
 
 	/**
 	 * @var array<string>
@@ -45,7 +42,7 @@ final class Configuration
 	 * ```
 	 * other services will be generated in $outputFile
 	 */
-	private $fileMapping;
+	private array $fileMapping;
 
 	private Inject $injectGenerator;
 
@@ -53,16 +50,16 @@ final class Configuration
 
 	private Component $componentFactory;
 
-	public function __construct(string $sourceDirectory, string $outputFile)
+	public function __construct(string $sourceDirectory, string $outputFile, bool $regenerate = false)
 	{
 		$this->sourceDirectory = $sourceDirectory;
 		$this->outputFile = $outputFile;
 		$this->mask = '*.php';
 		$this->fileMapping = [];
 		$templates = Path::create(__DIR__, 'templates');
-		$this->injectGenerator = new DefaultInject('Inject%s', $templates->string('inject.txt'));
-		$this->factoryGenerator = new DefaultFactory('%sFactory', $templates->string('factory.txt'));
-		$this->componentFactory = new DefaultComponent('%sComponent', $templates->string('component.txt'));
+		$this->injectGenerator = new DefaultInject('Inject%s', $templates->string('inject.txt'), $regenerate);
+		$this->factoryGenerator = new DefaultFactory('%sFactory', $templates->string('factory.txt'), $regenerate);
+		$this->componentFactory = new DefaultComponent('%sComponent', $templates->string('component.txt'), $regenerate);
 	}
 
 	public function getSourceDirectory(): string

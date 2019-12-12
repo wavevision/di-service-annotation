@@ -19,20 +19,11 @@ class ExtractServices
 		T_INTERFACE => 'implement',
 	];
 
-	/**
-	 * @var AnnotationReader
-	 */
-	private $annotationReader;
+	private AnnotationReader$annotationReader;
 
-	/**
-	 * @var Tokenizer
-	 */
-	private $tokenizer;
+	private Tokenizer $tokenizer;
 
-	/**
-	 * @var Configuration
-	 */
-	private $configuration;
+	private Configuration $configuration;
 
 	public function __construct(Configuration $configuration)
 	{

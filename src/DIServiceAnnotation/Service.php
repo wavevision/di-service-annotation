@@ -11,20 +11,11 @@ class Service
 
 	use SmartObject;
 
-	/**
-	 * @var DIService
-	 */
-	private $annotation;
+	private DIService $annotation;
 
-	/**
-	 * @var TokenizeResult
-	 */
-	private $tokenizeResult;
+	private TokenizeResult $tokenizeResult;
 
-	/**
-	 * @var SplFileInfo
-	 */
-	private $file;
+	private SplFileInfo $file;
 
 	public function __construct(DIService $annotation, TokenizeResult $tokenizeResult, SplFileInfo $file)
 	{
