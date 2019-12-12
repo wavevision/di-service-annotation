@@ -170,79 +170,20 @@ class ExtractServices
 
 	private function generateFactory(string $className, SplFileInfo $file): string
 	{
-		$reflectionClass = $this->getReflection($className);
-		$namespace = $reflectionClass->getNamespaceName();
-		$name = $reflectionClass->getShortName();
-		$factoryName = sprintf($this->configuration->getFactoryMask(), $name);
-		$filename = dirname($file->getPathname()) . "/$factoryName.php";
-		if (!is_file($filename)) {
-			$this->renderTemplate(
-				'factory',
-				$filename,
-				[
-					$namespace,
-					$factoryName,
-					$name,
-				]
-			);
-			require_once $filename;
-		}
-		$fullFactoryName = $namespace . '\\' . $factoryName;
-		return $fullFactoryName;
+		return $this->configuration->getFactoryGenerator()->generate(
+			$this->getReflection($className),
+			$file
+		);
 	}
 
 	private function generateInject(string $className, SplFileInfo $file): void
 	{
-		$reflectionClass = $this->getReflection($className);
-		$namespace = $reflectionClass->getNamespaceName();
-		$name = $reflectionClass->getShortName();
-		$injectName = sprintf($this->configuration->getInjectMask(), $name);
-		$outputFile = dirname($file->getPathname()) . "/$injectName.php";
-		if (!is_file($outputFile)) {
-			$this->renderTemplate(
-				'inject',
-				$outputFile,
-				[
-					$namespace,
-					$injectName,
-					$name,
-					lcfirst($injectName),
-					lcfirst($name),
-				]
-			);
-		}
+		$this->configuration->getInjectGenerator()->generate($this->getReflection($className), $file);
 	}
 
 	private function generateComponent(string $className, SplFileInfo $file, string $originalName): void
 	{
-		$reflectionClass = $this->getReflection($className);
-		$namespace = $reflectionClass->getNamespaceName();
-		$componentName = Arrays::lastItem(explode('\\', $namespace));
-		$maskedComponentName = sprintf($this->configuration->getComponentMask(), $componentName);
-		$type = $reflectionClass->getShortName();
-		$this->renderTemplate(
-			'component',
-			dirname($file->getPathname()) . "/$maskedComponentName.php",
-			[
-				$namespace,
-				$maskedComponentName,
-				$type,
-				lcfirst($type),
-				lcfirst($componentName . $type),
-				$componentName . $type,
-				$componentName,
-				$originalName,
-				lcfirst($componentName),
-			]
-		);
-	}
-
-	/**
-	 * @param array<mixed> $params
-	 */
-	private function renderTemplate(string $template, string $output, array $params): void
-	{
-		file_put_contents($output, sprintf(FileSystem::read(__DIR__ . '/templates/' . $template . '.txt'), ...$params));
+		$this->configuration->getComponentFactory()->generate($this->getReflection($className), $file, $originalName);
 	}
 
 	private function getReflection(string $className): ReflectionClass

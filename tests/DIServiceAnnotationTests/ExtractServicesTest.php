@@ -8,6 +8,9 @@ use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Wavevision\DIServiceAnnotation\Configuration;
 use Wavevision\DIServiceAnnotation\ExtractServices;
+use Wavevision\DIServiceAnnotation\Generators\DefaultComponent;
+use Wavevision\DIServiceAnnotation\Generators\DefaultFactory;
+use Wavevision\DIServiceAnnotation\Generators\DefaultInject;
 use Wavevision\DIServiceAnnotation\InvalidState;
 use Wavevision\Utils\Path;
 
@@ -23,19 +26,20 @@ class ExtractServicesTest extends TestCase
 		$filesToCreate = $this->getFilesToCreate();
 		$filesToCreate[] = $this->path('Services', 'InjectExistingInject.php');
 		$servicesDir = __DIR__ . '/Services';
+		$templates = Path::create(__DIR__, '..', '..', 'src', 'DIServiceAnnotation', 'Generators', 'templates');
 		$extractServices = new ExtractServices(
 			(new Configuration($servicesDir, $this->resultNeon(self::DEFAULT_NEON)))
 				->setMask('*.php')
 				->setSourceDirectory($servicesDir)
 				->setOutputFile($this->resultNeon(self::DEFAULT_NEON))
-				->setInjectMask('Inject%s')
-				->setFactoryMask('%sFactory')
+				->setInjectGenerator(new DefaultInject('Inject%s', $templates->string('inject.txt')))
+				->setFactoryGenerator(new DefaultFactory('%sFactory', $templates->string('factory.txt')))
+				->setComponentFactory(new DefaultComponent('%sComponent', $templates->string('component.txt')))
 				->setFileMapping(
 					[
 						'Wavevision\DIServiceAnnotationTests\Services\Nested' => $this->resultNeon(self::NESTED_NEON),
 					]
 				)
-				->setComponentMask('%sComponent')
 		);
 		$extractServices->run();
 		$this->assertSameConfig(self::DEFAULT_NEON);

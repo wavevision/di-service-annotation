@@ -3,6 +3,13 @@
 namespace Wavevision\DIServiceAnnotation;
 
 use Nette\SmartObject;
+use Wavevision\DIServiceAnnotation\Generators\Component;
+use Wavevision\DIServiceAnnotation\Generators\DefaultComponent;
+use Wavevision\DIServiceAnnotation\Generators\DefaultFactory;
+use Wavevision\DIServiceAnnotation\Generators\DefaultInject;
+use Wavevision\DIServiceAnnotation\Generators\Factory;
+use Wavevision\DIServiceAnnotation\Generators\Inject;
+use Wavevision\Utils\Path;
 
 final class Configuration
 {
@@ -40,23 +47,11 @@ final class Configuration
 	 */
 	private $fileMapping;
 
-	/**
-	 * Mask for generated inject traits
-	 * @var string
-	 */
-	private $injectMask;
+	private Inject $injectGenerator;
 
-	/**
-	 * Mask for generated factories
-	 * @var string
-	 */
-	private $factoryMask;
+	private Factory $factoryGenerator;
 
-	/**
-	 * Mask for generated components
-	 * @var string
-	 */
-	private $componentMask;
+	private Component $componentFactory;
 
 	public function __construct(string $sourceDirectory, string $outputFile)
 	{
@@ -64,9 +59,10 @@ final class Configuration
 		$this->outputFile = $outputFile;
 		$this->mask = '*.php';
 		$this->fileMapping = [];
-		$this->injectMask = 'Inject%s';
-		$this->factoryMask = '%sFactory';
-		$this->componentMask = '%sComponent';
+		$templates = Path::create(__DIR__, 'templates');
+		$this->injectGenerator = new DefaultInject('Inject%s', $templates->string('inject.txt'));
+		$this->factoryGenerator = new DefaultFactory('%sFactory', $templates->string('factory.txt'));
+		$this->componentFactory = new DefaultComponent('%sComponent', $templates->string('component.txt'));
 	}
 
 	public function getSourceDirectory(): string
@@ -119,36 +115,45 @@ final class Configuration
 		return $this;
 	}
 
-	public function getInjectMask(): string
+	public function getInjectGenerator(): Inject
 	{
-		return $this->injectMask;
+		return $this->injectGenerator;
 	}
 
-	public function setInjectMask(string $injectMask): self
+	/**
+	 * @return static
+	 */
+	public function setInjectGenerator(Inject $injectGenerator)
 	{
-		$this->injectMask = $injectMask;
+		$this->injectGenerator = $injectGenerator;
 		return $this;
 	}
 
-	public function getFactoryMask(): string
+	public function getFactoryGenerator(): Factory
 	{
-		return $this->factoryMask;
+		return $this->factoryGenerator;
 	}
 
-	public function setFactoryMask(string $factoryMask): self
+	/**
+	 * @return static
+	 */
+	public function setFactoryGenerator(Factory $factoryGenerator)
 	{
-		$this->factoryMask = $factoryMask;
+		$this->factoryGenerator = $factoryGenerator;
 		return $this;
 	}
 
-	public function getComponentMask(): string
+	public function getComponentFactory(): Component
 	{
-		return $this->componentMask;
+		return $this->componentFactory;
 	}
 
-	public function setComponentMask(string $componentMask): self
+	/**
+	 * @return static
+	 */
+	public function setComponentFactory(Component $componentFactory)
 	{
-		$this->componentMask = $componentMask;
+		$this->componentFactory = $componentFactory;
 		return $this;
 	}
 
