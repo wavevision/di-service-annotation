@@ -2,6 +2,8 @@
 
 namespace Wavevision\DIServiceAnnotation\Generators;
 
+use Nette\Utils\FileSystem;
+
 class DefaultGenerator
 {
 
@@ -60,9 +62,14 @@ class DefaultGenerator
 		return $this;
 	}
 
-	protected function shouldGenerate(string $filename): bool
+	/**
+	 * @param array<mixed> $params
+	 */
+	protected function renderTemplate(string $output, array $params): void
 	{
-		return $this->regenerate || !is_file($filename);
+		if ($this->regenerate || !is_file($output)) {
+			file_put_contents($output, sprintf(FileSystem::read($this->template), ...$params));
+		}
 	}
 
 }

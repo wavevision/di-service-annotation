@@ -14,18 +14,15 @@ class DefaultFactory extends DefaultGenerator implements Factory
 		$namespace = $reflectionClass->getNamespaceName();
 		$factoryName = sprintf($this->mask, $name);
 		$filename = dirname($file->getPathname()) . "/$factoryName.php";
-		if ($this->shouldGenerate($filename)) {
-			Helpers::renderTemplate(
-				$this->template,
-				$filename,
-				[
-					$namespace,
-					$factoryName,
-					$name,
-				]
-			);
-			require_once $filename;
-		}
+		$this->renderTemplate(
+			$filename,
+			[
+				$namespace,
+				$factoryName,
+				$name,
+			]
+		);
+		require_once $filename;
 		$fullFactoryName = $namespace . '\\' . $factoryName;
 		return $fullFactoryName;
 	}
