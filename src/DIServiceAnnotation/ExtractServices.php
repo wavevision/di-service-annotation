@@ -140,7 +140,12 @@ class ExtractServices
 	{
 		$params = $annotation->params;
 		$tags = $annotation->tags;
-		$lines[] = sprintf("- %s: %s", self::TOKEN_TO_FACTORY[$token], $className);
+		$lines[] = sprintf(
+			"%s %s: %s",
+			isset($annotation->name) ? $annotation->name . ":\n\t " : '-',
+			self::TOKEN_TO_FACTORY[$token],
+			$className
+		);
 		if (!Arrays::isEmpty($params)) {
 			$lines[] = $this->generateAttributes('arguments', $params);
 		}

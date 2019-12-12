@@ -10,6 +10,11 @@ final class DIService
 {
 
 	/**
+	 * @var string
+	 */
+	public $name;
+
+	/**
 	 * @var bool
 	 */
 	public $enableInject = true;
