@@ -11,7 +11,6 @@ use Wavevision\DIServiceAnnotation\ExtractServices;
 use Wavevision\DIServiceAnnotation\Generators\DefaultComponent;
 use Wavevision\DIServiceAnnotation\Generators\DefaultFactory;
 use Wavevision\DIServiceAnnotation\Generators\DefaultGenerator;
-use Wavevision\DIServiceAnnotation\Generators\DefaultInject;
 use Wavevision\DIServiceAnnotation\InvalidState;
 use Wavevision\Utils\Path;
 
@@ -24,6 +23,7 @@ class ExtractServicesTest extends TestCase
 
 	public function testRun(): void
 	{
+		$this->setOutputCallback(fn() => null);
 		$filesToCreate = $this->getFilesToCreate();
 		$filesToCreate[] = $this->path('Services', 'InjectExistingInject.php');
 		$servicesDir = __DIR__ . '/Services';

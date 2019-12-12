@@ -3,6 +3,7 @@
 namespace Wavevision\DIServiceAnnotation\Generators;
 
 use Nette\Utils\FileSystem;
+use Wavevision\Utils\Path;
 
 class DefaultGenerator
 {
@@ -69,6 +70,7 @@ class DefaultGenerator
 	{
 		if ($this->regenerate || !is_file($output)) {
 			file_put_contents($output, sprintf(FileSystem::read($this->template), ...$params));
+			echo "generating: " . Path::realpath($output) . "\n";
 		}
 	}
 
