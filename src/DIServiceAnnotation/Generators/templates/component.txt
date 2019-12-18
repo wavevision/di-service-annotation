@@ -12,14 +12,14 @@ trait %2$s
 		$this->%5$s = $%4$s;
 	}
 
-	public function createComponent%7$s(): %8$s
-	{
-		return $this->%5$s->create();
-	}
-
 	public function get%7$sComponent(): %8$s
 	{
 		return $this['%9$s'];
+	}
+
+	protected function createComponent%7$s(): %8$s
+	{
+		return $this->%5$s->create();
 	}
 
 }
