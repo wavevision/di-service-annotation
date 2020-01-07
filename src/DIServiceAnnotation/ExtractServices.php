@@ -85,7 +85,7 @@ class ExtractServices
 		}
 		FileSystem::write(
 			$outputFile,
-			"# generated file do not modify directly\nservices:\n\t" . implode("\n\t", $lines) . "\n"
+			"# Generated file, do not modify directly!\nservices:\n\t" . implode("\n\t", $lines) . "\n"
 		);
 	}
 
@@ -144,7 +144,7 @@ class ExtractServices
 			$lines[] = $this->generateAttributes('tags', $tags);
 		}
 		if ($annotation->enableInject) {
-			$lines[] = "  inject: on";
+			$lines[] = "  inject: true";
 		}
 		return $lines;
 	}
