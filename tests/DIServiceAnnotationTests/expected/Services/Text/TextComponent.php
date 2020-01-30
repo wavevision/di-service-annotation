@@ -12,14 +12,14 @@ trait TextComponent
 		$this->textControlFactory = $controlFactory;
 	}
 
-	public function createComponentText(): Control
-	{
-		return $this->textControlFactory->create();
-	}
-
 	public function getTextComponent(): Control
 	{
 		return $this['text'];
+	}
+
+	protected function createComponentText(): Control
+	{
+		return $this->textControlFactory->create();
 	}
 
 }

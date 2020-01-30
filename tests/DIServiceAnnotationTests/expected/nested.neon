@@ -1,8 +1,8 @@
-# generated file do not modify directly
+# Generated file, do not modify directly!
 services:
 	- implement: Wavevision\DIServiceAnnotationTests\Services\Nested\ControlFactory
-	  inject: on
+	  inject: true
 	- implement: Wavevision\DIServiceAnnotationTests\Services\Nested\ExampleServiceFactory
 	  arguments: [%wwwDir%]
 	  tags: [t1]
-	  inject: on
+	  inject: true

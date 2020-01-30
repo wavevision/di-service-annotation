@@ -1,4 +1,5 @@
-# Wavevision DI service annotation
+<p align="center"><a href="https://github.com/wavevision"><img alt="Wavevision s.r.o." src="https://wavevision.com/images/wavevision-logo.png" width="120" /></a></p>
+<h1 align="center">DIService Annotation</h1>
 
 [![Build Status](https://travis-ci.org/wavevision/di-service-annotation.svg?branch=master)](https://travis-ci.org/wavevision/di-service-annotation)
 [![Coverage Status](https://coveralls.io/repos/github/wavevision/di-service-annotation/badge.svg?branch=master)](https://coveralls.io/github/wavevision/di-service-annotation?branch=master)
