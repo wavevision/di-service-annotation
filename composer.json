@@ -31,7 +31,7 @@
     "php": ">=7.2",
     "doctrine/annotations": "^1.8",
     "nette/finder": "^2.5",
-    "wavevision/utils": "^1.1"
+    "wavevision/utils": "^2.2"
   },
   "require-dev": {
     "jakub-onderka/php-parallel-lint": "^1.0",

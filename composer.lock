@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb379ffd49a2abd40750531cadd87b26",
+    "content-hash": "91b513f2448ed3ae47927a3a09a56215",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -318,16 +318,16 @@
         },
         {
             "name": "wavevision/utils",
-            "version": "1.12.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wavevision/utils.git",
-                "reference": "df51faf043e44a7130a4572c086b8befd83e7f64"
+                "reference": "c240a645deb8502b44aa9131b55a6d86e21b77cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wavevision/utils/zipball/df51faf043e44a7130a4572c086b8befd83e7f64",
-                "reference": "df51faf043e44a7130a4572c086b8befd83e7f64",
+                "url": "https://api.github.com/repos/wavevision/utils/zipball/c240a645deb8502b44aa9131b55a6d86e21b77cf",
+                "reference": "c240a645deb8502b44aa9131b55a6d86e21b77cf",
                 "shasum": ""
             },
             "require": {
@@ -335,20 +335,22 @@
                 "flow/jsonpath": "^0.4.0",
                 "nette/finder": "^2.5",
                 "nette/utils": "^3.0",
-                "php": ">=7.2"
+                "php": ">=7.4"
             },
             "require-dev": {
                 "jakub-onderka/php-parallel-lint": "^1.0",
                 "mikey179/vfsstream": "^1.6",
                 "phing/phing": "^2.16",
                 "php-coveralls/php-coveralls": "^2.1",
-                "php-mock/php-mock-mockery": "^1.3",
                 "php-mock/php-mock-phpunit": "^2.4",
-                "phpstan/phpstan": "^0.10",
+                "phpstan/phpstan": "^0.12.3",
                 "phpunit/phpunit": "^8.3",
-                "wavevision/coding-standard": "^1.1.0"
+                "wavevision/coding-standard": "^3.0"
             },
             "type": "library",
+            "extra": {
+                "phpstan": []
+            },
             "autoload": {
                 "psr-4": {
                     "Wavevision\\": "src"
@@ -373,7 +375,7 @@
                 }
             ],
             "description": "Useful PHP utilities and helpers.",
-            "time": "2019-12-11T15:51:04+00:00"
+            "time": "2020-01-30T12:03:50+00:00"
         }
     ],
     "packages-dev": [
