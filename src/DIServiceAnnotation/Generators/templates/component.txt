@@ -22,4 +22,9 @@ trait %2$s
 		return $this->%5$s->create();
 	}
 
+	protected function attachComponent%7$s(%8$s $component): void
+	{
+		$this->addComponent($component, '%9$s');
+	}
+
 }

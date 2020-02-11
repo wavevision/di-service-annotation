@@ -22,4 +22,9 @@ trait TextComponent
 		return $this->textControlFactory->create();
 	}
 
+	protected function attachComponentText(Control $component): void
+	{
+		$this->addComponent($component, 'text');
+	}
+
 }
