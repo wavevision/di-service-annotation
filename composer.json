@@ -34,9 +34,9 @@
     "sort-packages": true
   },
   "require": {
-    "php": ">=7.4",
     "doctrine/annotations": "^1.8",
     "nette/finder": "^2.5",
+    "php": ">=7.4",
     "wavevision/utils": "^2.2"
   },
   "require-dev": {
@@ -46,7 +46,7 @@
     "php-coveralls/php-coveralls": "^2.1",
     "phpstan/phpstan": "^0.11",
     "phpunit/phpunit": "^8.3",
-    "wavevision/coding-standard": "^1.1.0"
+    "wavevision/coding-standard": "^3.1"
   },
   "scripts": {
     "phing": "phing"

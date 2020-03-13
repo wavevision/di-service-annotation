@@ -9,39 +9,24 @@ namespace Wavevision\DIServiceAnnotation;
 final class DIService
 {
 
-	/**
-	 * @var string
-	 */
-	public $name;
+	public ?string $name = null;
 
-	/**
-	 * @var bool
-	 */
-	public $enableInject = true;
+	public bool $enableInject = true;
 
-	/**
-	 * @var bool
-	 */
-	public $generateComponent;
+	public bool $generateComponent = false;
 
-	/**
-	 * @var bool
-	 */
-	public $generateFactory;
+	public bool $generateFactory = false;
 
-	/**
-	 * @var bool
-	 */
-	public $generateInject;
+	public bool $generateInject = false;
 
 	/**
 	 * @var string[]
 	 */
-	public $params = [];
+	public array $params = [];
 
 	/**
 	 * @var string[]
 	 */
-	public $tags = [];
+	public array $tags = [];
 
 }

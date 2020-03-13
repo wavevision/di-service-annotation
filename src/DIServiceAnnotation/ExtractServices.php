@@ -121,9 +121,6 @@ class ExtractServices
 	}
 
 	/**
-	 * @param DIService $annotation
-	 * @param string $className
-	 * @param int $token
 	 * @param string[] $lines
 	 * @return string[]
 	 */
@@ -150,9 +147,7 @@ class ExtractServices
 	}
 
 	/**
-	 * @param string $name
 	 * @param string[] $attributes
-	 * @return string
 	 */
 	private function generateAttributes(string $name, array $attributes): string
 	{
