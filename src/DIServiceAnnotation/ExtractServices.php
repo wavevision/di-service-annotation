@@ -9,8 +9,6 @@ use Nette\Utils\Strings;
 use ReflectionClass;
 use SplFileInfo;
 use Wavevision\Utils\Arrays;
-use Wavevision\Utils\ExternalProgram\Executor;
-use Wavevision\Utils\Path;
 use Wavevision\Utils\Tokenizer\Tokenizer;
 
 class ExtractServices
@@ -96,13 +94,8 @@ class ExtractServices
 	 */
 	private function findServices(): array
 	{
+		$fileValidator = new FileValidator($this->configuration);
 		$services = [];
-		$cacheFile = $this->getCacheFile();
-		if (is_file($cacheFile)) {
-			$cache = unserialize(FileSystem::read($cacheFile));
-		} else {
-			$cache = [];
-		}
 		/** @var  SplFileInfo $file */
 		foreach (Finder::findFiles($this->configuration->getMask())->from(
 			$this->configuration->getSourceDirectory()
@@ -111,55 +104,21 @@ class ExtractServices
 			$tokenizerResult = $this->tokenizer->getStructureNameFromFile($pathname, [T_CLASS, T_INTERFACE]);
 			if ($tokenizerResult !== null) {
 				$className = $tokenizerResult->getFullyQualifiedName();
-				$hash = md5_file($pathname);
-				if ($autoload = $this->configuration->getAutoloadFile()) {
-					if (isset($cache[$pathname]) && $cache[$pathname]['hash'] === $hash) {
-						if ($cache[$pathname]['error']) {
-							$this->configuration->getOutput()->writeln(
-								"Loading from cache: Fatal error in file $pathname\n"
-							);
-							continue;
-						}
-					} else {
-						$classValidator = Path::join(__DIR__, '..', 'validate-class.php');
-						$result = Executor::executeUnchecked("php '$classValidator' '$autoload' '$className'");
-						if ($result->getReturnValue() !== 0) {
-							$this->configuration->getOutput()->writeln(
-								"Fatal error in file $pathname\n" . $result->getOutputAsString()
-							);
-							$cache[$pathname] = [
-								'hash' => $hash,
-								'error' => true,
-							];
-							continue;
-						}
-					}
+				if ($fileValidator->containsErrors($pathname, $className)) {
+					continue;
 				}
-				$cache[$pathname] = [
-					'hash' => $hash,
-					'error' => false,
-				];
 				$serviceAnnotation = $this->getAnnotation($className);
 				if ($serviceAnnotation !== null) {
 					$service = new Service($serviceAnnotation, $tokenizerResult, $file);
 					$this->configuration->getOutput()->writeln(
-						"Processing annotation in file: " . $service->getFile()->getRealPath()
+						"Processing annotation in class: $className"
 					);
 					$services[$className] = $service;
 				}
 			}
 		}
-		FileSystem::write($cacheFile, serialize($cache));
+		$fileValidator->flushCache();
 		return $services;
-	}
-
-	private function getCacheFile(): string
-	{
-		$tempDir = $this->configuration->getTempDir();
-		if ($tempDir === null) {
-			throw new InvalidState('Temp directory not set.');
-		}
-		return Path::join($tempDir, '.di-service-annotation.cache');
 	}
 
 	private function getAnnotation(string $className): ?DIService
