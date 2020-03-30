@@ -97,11 +97,22 @@ class ExtractServices
 	private function findServices(): array
 	{
 		$services = [];
+		$cacheFile = $this->getCacheFile();
+		if (is_file($cacheFile)) {
+			$cache = unserialize(FileSystem::read($cacheFile));
+		} else {
+			$cache = [];
+		}
 		/** @var  SplFileInfo $file */
 		foreach (Finder::findFiles($this->configuration->getMask())->from(
 			$this->configuration->getSourceDirectory()
 		) as $file) {
 			$pathname = $file->getPathname();
+			$hash = md5_file($pathname);
+			if (isset($cache[$pathname]) && $cache[$pathname] === $hash) {
+				continue;
+			}
+			$cache[$pathname] = $hash;
 			$tokenizerResult = $this->tokenizer->getStructureNameFromFile($pathname, [T_CLASS, T_INTERFACE]);
 			if ($tokenizerResult !== null) {
 				$className = $tokenizerResult->getFullyQualifiedName();
@@ -126,7 +137,17 @@ class ExtractServices
 				}
 			}
 		}
+		FileSystem::write($cacheFile, serialize($cache));
 		return $services;
+	}
+
+	private function getCacheFile(): string
+	{
+		$tempDir = $this->configuration->getTempDir();
+		if ($tempDir === null) {
+			throw new InvalidState('Temp directory not set.');
+		}
+		return Path::join($tempDir, '.di-service-annotation.cache');
 	}
 
 	private function getAnnotation(string $className): ?DIService

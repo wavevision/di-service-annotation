@@ -9,5 +9,5 @@ Runner::run(
 	(new Configuration(
 		__DIR__ . '/../tests/DIServiceAnnotationTests/Services',
 		__DIR__ . '/../temp/test.neon'
-	))->setAutoloadFile($autoload)
+	))->setAutoloadFile($autoload)->setTempDir(__DIR__ . '/../temp')
 );

@@ -54,6 +54,8 @@ final class Configuration
 
 	private Output $output;
 
+	private ?string $tempDir;
+
 	public function __construct(string $sourceDirectory, string $outputFile, bool $regenerate = false)
 	{
 		$this->sourceDirectory = $sourceDirectory;
@@ -63,6 +65,7 @@ final class Configuration
 		$templates = Path::create(__DIR__, 'Generators', 'templates');
 		$this->autoloadFile = null;
 		$this->output = new ConsoleOutput();
+		$this->tempDir = null;
 		$this->injectGenerator = new DefaultInject($this, 'Inject%s', $templates->string('inject.txt'), $regenerate);
 		$this->factoryGenerator = new DefaultFactory(
 			$this,
@@ -195,6 +198,20 @@ final class Configuration
 	public function setOutput(Output $output)
 	{
 		$this->output = $output;
+		return $this;
+	}
+
+	public function getTempDir(): ?string
+	{
+		return $this->tempDir;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function setTempDir(?string $tempDir)
+	{
+		$this->tempDir = $tempDir;
 		return $this;
 	}
 
