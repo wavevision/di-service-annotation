@@ -5,8 +5,6 @@ namespace Wavevision\DIServiceAnnotation;
 use Nette\SmartObject;
 use ReflectionClass;
 
-require_once $argv[1];
-
 class ClassValidator
 {
 
@@ -19,5 +17,3 @@ class ClassValidator
 	}
 
 }
-
-exit((new ClassValidator())->validate($argv[2]));

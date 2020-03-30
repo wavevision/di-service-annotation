@@ -12,4 +12,5 @@ class ExistingInject
 {
 
 	use SmartObject;
+
 }

@@ -9,4 +9,5 @@ class FatalError
 
 	use SmartObject;
 	use Force;
+
 }

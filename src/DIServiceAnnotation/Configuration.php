@@ -50,7 +50,9 @@ final class Configuration
 
 	private Component $componentFactory;
 
-	private string $autoloadFile;
+	private ?string $autoloadFile;
+
+	private Output $output;
 
 	public function __construct(string $sourceDirectory, string $outputFile, bool $regenerate = false)
 	{
@@ -59,9 +61,21 @@ final class Configuration
 		$this->mask = '*.php';
 		$this->fileMapping = [];
 		$templates = Path::create(__DIR__, 'Generators', 'templates');
-		$this->injectGenerator = new DefaultInject('Inject%s', $templates->string('inject.txt'), $regenerate);
-		$this->factoryGenerator = new DefaultFactory('%sFactory', $templates->string('factory.txt'), $regenerate);
-		$this->componentFactory = new DefaultComponent('%sComponent', $templates->string('component.txt'), $regenerate);
+		$this->autoloadFile = null;
+		$this->output = new ConsoleOutput();
+		$this->injectGenerator = new DefaultInject($this, 'Inject%s', $templates->string('inject.txt'), $regenerate);
+		$this->factoryGenerator = new DefaultFactory(
+			$this,
+			'%sFactory',
+			$templates->string('factory.txt'),
+			$regenerate
+		);
+		$this->componentFactory = new DefaultComponent(
+			$this,
+			'%sComponent',
+			$templates->string('component.txt'),
+			$regenerate
+		);
 	}
 
 	public function getSourceDirectory(): string
@@ -156,7 +170,7 @@ final class Configuration
 		return $this;
 	}
 
-	public function getAutoloadFile(): string
+	public function getAutoloadFile(): ?string
 	{
 		return $this->autoloadFile;
 	}
@@ -164,9 +178,23 @@ final class Configuration
 	/**
 	 * @return static
 	 */
-	public function setAutoloadFile(string $autoloadFile)
+	public function setAutoloadFile(?string $autoloadFile)
 	{
 		$this->autoloadFile = $autoloadFile;
+		return $this;
+	}
+
+	public function getOutput(): Output
+	{
+		return $this->output;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function setOutput(Output $output)
+	{
+		$this->output = $output;
 		return $this;
 	}
 

@@ -28,12 +28,17 @@ class ExtractServicesTest extends TestCase
 		$filesToCreate[] = $this->path('Services', 'InjectExistingInject.php');
 		$servicesDir = __DIR__ . '/Services';
 		$templates = Path::create(__DIR__, '..', '..', 'src', 'DIServiceAnnotation', 'Generators', 'templates');
-		$configuration = (new Configuration($servicesDir, $this->resultNeon(self::DEFAULT_NEON)))
+		$configuration = (new Configuration($servicesDir, $this->resultNeon(self::DEFAULT_NEON)));
+		$configuration
 			->setMask('*.php')
 			->setSourceDirectory($servicesDir)
 			->setOutputFile($this->resultNeon(self::DEFAULT_NEON))
-			->setFactoryGenerator(new DefaultFactory('%sFactory', $templates->string('factory.txt')))
-			->setComponentFactory(new DefaultComponent('%sComponent', $templates->string('component.txt')))
+			->setFactoryGenerator(
+				new DefaultFactory($configuration, '%sFactory', $templates->string('factory.txt'), false)
+			)
+			->setComponentFactory(
+				new DefaultComponent($configuration, '%sComponent', $templates->string('component.txt'), false)
+			)
 			->setFileMapping(
 				[
 					'Wavevision\DIServiceAnnotationTests\Services\Nested' => $this->resultNeon(self::NESTED_NEON),
