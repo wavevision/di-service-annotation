@@ -108,25 +108,37 @@ class ExtractServices
 			$this->configuration->getSourceDirectory()
 		) as $file) {
 			$pathname = $file->getPathname();
-			$hash = md5_file($pathname);
-			if (isset($cache[$pathname]) && $cache[$pathname] === $hash) {
-				continue;
-			}
-			$cache[$pathname] = $hash;
 			$tokenizerResult = $this->tokenizer->getStructureNameFromFile($pathname, [T_CLASS, T_INTERFACE]);
 			if ($tokenizerResult !== null) {
 				$className = $tokenizerResult->getFullyQualifiedName();
+				$hash = md5_file($pathname);
 				if ($autoload = $this->configuration->getAutoloadFile()) {
-					$classValidator = Path::join(__DIR__, '..', 'validate-class.php');
-					$autoload = $this->configuration->getAutoloadFile();
-					$result = Executor::executeUnchecked("php '$classValidator' '$autoload' '$className'");
-					if ($result->getReturnValue() !== 0) {
-						$this->configuration->getOutput()->writeln(
-							"Fatal error in file $pathname\n" . $result->getOutputAsString()
-						);
-						continue;
+					if (isset($cache[$pathname]) && $cache[$pathname]['hash'] === $hash) {
+						if ($cache[$pathname]['error']) {
+							$this->configuration->getOutput()->writeln(
+								"Loading from cache: Fatal error in file $pathname\n"
+							);
+							continue;
+						}
+					} else {
+						$classValidator = Path::join(__DIR__, '..', 'validate-class.php');
+						$result = Executor::executeUnchecked("php '$classValidator' '$autoload' '$className'");
+						if ($result->getReturnValue() !== 0) {
+							$this->configuration->getOutput()->writeln(
+								"Fatal error in file $pathname\n" . $result->getOutputAsString()
+							);
+							$cache[$pathname] = [
+								'hash' => $hash,
+								'error' => true,
+							];
+							continue;
+						}
 					}
 				}
+				$cache[$pathname] = [
+					'hash' => $hash,
+					'error' => false,
+				];
 				$serviceAnnotation = $this->getAnnotation($className);
 				if ($serviceAnnotation !== null) {
 					$service = new Service($serviceAnnotation, $tokenizerResult, $file);
