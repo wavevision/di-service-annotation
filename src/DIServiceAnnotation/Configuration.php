@@ -50,6 +50,8 @@ final class Configuration
 
 	private Component $componentFactory;
 
+	private string $autoloadFile;
+
 	public function __construct(string $sourceDirectory, string $outputFile, bool $regenerate = false)
 	{
 		$this->sourceDirectory = $sourceDirectory;
@@ -151,6 +153,20 @@ final class Configuration
 	public function setComponentFactory(Component $componentFactory)
 	{
 		$this->componentFactory = $componentFactory;
+		return $this;
+	}
+
+	public function getAutoloadFile(): string
+	{
+		return $this->autoloadFile;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function setAutoloadFile(string $autoloadFile)
+	{
+		$this->autoloadFile = $autoloadFile;
 		return $this;
 	}
 

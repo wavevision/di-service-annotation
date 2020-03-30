@@ -111,7 +111,7 @@ class ExtractServices
 			if ($tokenizerResult !== null) {
 				$className = $tokenizerResult->getFullyQualifiedName();
 				$classValidator = __DIR__ . '/ClassValidator.php';
-				$autoload = __DIR__ . '/../../vendor/autoload.php';
+				$autoload = $this->configuration->getAutoloadFile();
 				$result = Executor::executeUnchecked("php '$classValidator' '$autoload' '$className'");
 				if ($result->getReturnValue() !== 0) {
 					echo "fatal error in file $pathname\n";
