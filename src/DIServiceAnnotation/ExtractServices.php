@@ -9,6 +9,7 @@ use Nette\Utils\Strings;
 use ReflectionClass;
 use SplFileInfo;
 use Wavevision\Utils\Arrays;
+use Wavevision\Utils\ExternalProgram\Executor;
 use Wavevision\Utils\Tokenizer\Tokenizer;
 
 class ExtractServices
@@ -99,9 +100,23 @@ class ExtractServices
 		foreach (Finder::findFiles($this->configuration->getMask())->from(
 			$this->configuration->getSourceDirectory()
 		) as $file) {
-			$tokenizerResult = $this->tokenizer->getStructureNameFromFile($file->getPathname(), [T_CLASS, T_INTERFACE]);
+			// php -l filename.php to check syntax errors
+			$pathname = $file->getPathname();
+			$result = Executor::executeUnchecked("php -l $pathname");
+			if ($result->getReturnValue() !== 0) {
+				echo "syntax error in file $pathname\n";
+				continue;
+			}
+			$tokenizerResult = $this->tokenizer->getStructureNameFromFile($pathname, [T_CLASS, T_INTERFACE]);
 			if ($tokenizerResult !== null) {
 				$className = $tokenizerResult->getFullyQualifiedName();
+				$classValidator = __DIR__ . '/ClassValidator.php';
+				$autoload = __DIR__ . '/../../vendor/autoload.php';
+				$result = Executor::executeUnchecked("php '$classValidator' '$autoload' '$className'");
+				if ($result->getReturnValue() !== 0) {
+					echo "fatal error in file $pathname\n";
+					continue;
+				}
 				$serviceAnnotation = $this->getAnnotation($className);
 				if ($serviceAnnotation !== null) {
 					$services[$className] = new Service($serviceAnnotation, $tokenizerResult, $file);
