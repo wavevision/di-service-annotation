@@ -82,6 +82,6 @@ $configuration->setFileMapping([
 * `setComponentFactory: Component` – set custom generator for components
 * `setRegenerate: bool` – regenerate all generated code each run - default `false`
 * `enableFileValidation` – check each file for fatal errors before reading annotation, skip file on error
-    * `autoloadFile: string` – file for class autoloading - e.g. `vendor/autoload.php`
-    * `tempDir: string` – enable cache, directory for cache file - only changed files are validated
+    * `autoloadFile: string` – file for class autoloading, e.g. `vendor/autoload.php`
+    * `tempDir: string` – enable cache, directory for cache file, only changed files are validated
 

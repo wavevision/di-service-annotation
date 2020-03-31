@@ -13,17 +13,17 @@ class Cache
 
 	use SmartObject;
 
-	private Configuration $configuration;
-
 	private bool $enabled;
 
+	/**
+	 * @var array<mixed>
+	 */
 	private array $cache;
 
 	private string $cacheFile;
 
 	public function __construct(Configuration $configuration)
 	{
-		$this->configuration = $configuration;
 		$tempDir = $configuration->getTempDir();
 		$this->enabled = $tempDir !== null;
 		if ($this->enabled) {
