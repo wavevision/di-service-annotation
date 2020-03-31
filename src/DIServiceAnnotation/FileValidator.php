@@ -34,7 +34,7 @@ class FileValidator
 					return true;
 				}
 			} else {
-				$classValidator = Path::join(__DIR__, '..', 'validate-class.php');
+				$classValidator = Path::join(__DIR__, '..', '..', 'cli', 'validate-class.php');
 				$result = Executor::executeUnchecked("php '$classValidator' '$autoload' '$className'");
 				if ($result->getReturnValue() !== 0) {
 					$this->configuration->getOutput()->writeln(

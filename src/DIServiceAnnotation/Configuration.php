@@ -181,7 +181,7 @@ final class Configuration
 	/**
 	 * @return static
 	 */
-	public function setAutoloadFile(?string $autoloadFile)
+	public function enableFileValidation(?string $autoloadFile)
 	{
 		$this->autoloadFile = $autoloadFile;
 		return $this;
@@ -209,7 +209,7 @@ final class Configuration
 	/**
 	 * @return static
 	 */
-	public function setTempDir(?string $tempDir)
+	public function enableCache(?string $tempDir)
 	{
 		$this->tempDir = $tempDir;
 		return $this;

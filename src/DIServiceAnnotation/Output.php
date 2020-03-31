@@ -5,8 +5,6 @@ namespace Wavevision\DIServiceAnnotation;
 interface Output
 {
 
-	public function write(string $string): void;
-
 	public function writeln(string $string): void;
 
 }

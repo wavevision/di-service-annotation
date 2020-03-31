@@ -9,6 +9,8 @@ use Wavevision\Utils\Path;
 class Cache
 {
 
+	public const FILE = '.di-service-annotation.cache';
+
 	use SmartObject;
 
 	private Configuration $configuration;
@@ -17,14 +19,17 @@ class Cache
 
 	private array $cache;
 
+	private string $cacheFile;
+
 	public function __construct(Configuration $configuration)
 	{
 		$this->configuration = $configuration;
-		$this->enabled = $configuration->getTempDir() !== null;
+		$tempDir = $configuration->getTempDir();
+		$this->enabled = $tempDir !== null;
 		if ($this->enabled) {
-			$cacheFile = $this->getCacheFile();
-			if (is_file($cacheFile)) {
-				$this->cache = unserialize(FileSystem::read($cacheFile));
+			$this->cacheFile = Path::join($tempDir, self::FILE);
+			if (is_file($this->cacheFile)) {
+				$this->cache = unserialize(FileSystem::read($this->cacheFile));
 			} else {
 				$this->cache = [];
 			}
@@ -57,17 +62,8 @@ class Cache
 	public function flush(): void
 	{
 		if ($this->enabled) {
-			FileSystem::write($this->getCacheFile(), serialize($this->cache));
+			FileSystem::write($this->cacheFile, serialize($this->cache));
 		}
-	}
-
-	private function getCacheFile(): string
-	{
-		$tempDir = $this->configuration->getTempDir();
-		if ($tempDir === null) {
-			throw new InvalidState('Temp directory not set.');
-		}
-		return Path::join($tempDir, '.di-service-annotation.cache');
 	}
 
 }

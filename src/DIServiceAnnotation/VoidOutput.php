@@ -2,16 +2,16 @@
 
 namespace Wavevision\DIServiceAnnotation;
 
+use Nette\SmartObject;
+
 class VoidOutput implements Output
 {
 
-	public function write(string $string): void
-	{
-	}
+	use SmartObject;
 
 	public function writeln(string $string): void
 	{
-		// TODO: Implement writeln() method.
+		// intentionally blank
 	}
 
 }
