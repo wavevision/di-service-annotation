@@ -58,3 +58,30 @@ will generate from [class](tests/DIServiceAnnotationTests/Services/Nested/Exampl
 - `tags: string[]` – list of tags to be used with the service in generated config
 
 For configuration options see [Configuration properties](src/DIServiceAnnotation/Configuration.php#L7).
+
+### Configuration option
+
+#### Required
+
+* `sourceDirectory` - location of services
+* `outputFile` - output file for registered services
+
+#### Optional
+
+* `setMask` - mask for file locator - default `*.php`
+* `setFileMapping` - map for splitting configs by namespace
+
+```php
+$configuration->setFileMapping([
+    'RootNamespace\Namespace1' => 'config1.neon',
+    'RootNamespace\Namespace2' => 'config2.neon',
+]);
+```
+* `setInjectGenerator` - set custom generator for injects
+* `setFactoryGenerator` - set custom generator for factories
+* `setComponentFactory` - set custom generator for components
+* `setRegenerate` - regenerate all generated code each run - default `false`
+* `enableFileValidation($autoloadFile, $tempDir = null)` - check each file for fatal errors before reading annotation, skip this file on error
+    * `$autoloadFile` - file for class autoloading - e.g. `vendor/autoload.php`
+    * `$tempDir` - enable cache, directory for cache file - only changed files are validated
+
