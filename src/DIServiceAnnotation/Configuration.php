@@ -50,16 +50,28 @@ final class Configuration
 
 	private Component $componentFactory;
 
-	public function __construct(string $sourceDirectory, string $outputFile, bool $regenerate = false)
+	private ?string $autoloadFile;
+
+	private Output $output;
+
+	private ?string $tempDir;
+
+	private bool $regenerate;
+
+	public function __construct(string $sourceDirectory, string $outputFile)
 	{
 		$this->sourceDirectory = $sourceDirectory;
 		$this->outputFile = $outputFile;
 		$this->mask = '*.php';
 		$this->fileMapping = [];
 		$templates = Path::create(__DIR__, 'Generators', 'templates');
-		$this->injectGenerator = new DefaultInject('Inject%s', $templates->string('inject.txt'), $regenerate);
-		$this->factoryGenerator = new DefaultFactory('%sFactory', $templates->string('factory.txt'), $regenerate);
-		$this->componentFactory = new DefaultComponent('%sComponent', $templates->string('component.txt'), $regenerate);
+		$this->autoloadFile = null;
+		$this->output = new ConsoleOutput();
+		$this->tempDir = null;
+		$this->regenerate = false;
+		$this->injectGenerator = new DefaultInject($this, 'Inject%s', $templates->string('inject.txt'));
+		$this->factoryGenerator = new DefaultFactory($this, '%sFactory', $templates->string('factory.txt'));
+		$this->componentFactory = new DefaultComponent($this, '%sComponent', $templates->string('component.txt'));
 	}
 
 	public function getSourceDirectory(): string
@@ -151,6 +163,72 @@ final class Configuration
 	public function setComponentFactory(Component $componentFactory)
 	{
 		$this->componentFactory = $componentFactory;
+		return $this;
+	}
+
+	public function getAutoloadFile(): ?string
+	{
+		return $this->autoloadFile;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function enableFileValidation(string $autoloadFile, ?string $tempDir = null)
+	{
+		$this->setAutoloadFile($autoloadFile);
+		$this->setTempDir($tempDir);
+		return $this;
+	}
+
+	public function getOutput(): Output
+	{
+		return $this->output;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function setOutput(Output $output)
+	{
+		$this->output = $output;
+		return $this;
+	}
+
+	public function getTempDir(): ?string
+	{
+		return $this->tempDir;
+	}
+
+	public function getRegenerate(): bool
+	{
+		return $this->regenerate;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function setRegenerate(bool $regenerate)
+	{
+		$this->regenerate = $regenerate;
+		return $this;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function setAutoloadFile(?string $autoloadFile)
+	{
+		$this->autoloadFile = $autoloadFile;
+		return $this;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function setTempDir(?string $tempDir)
+	{
+		$this->tempDir = $tempDir;
 		return $this;
 	}
 

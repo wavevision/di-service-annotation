@@ -3,22 +3,23 @@
 namespace Wavevision\DIServiceAnnotation\Generators;
 
 use Nette\Utils\FileSystem;
+use Wavevision\DIServiceAnnotation\Configuration;
 use Wavevision\Utils\Path;
 
 class DefaultGenerator
 {
 
+	protected Configuration $configuration;
+
 	protected string $mask;
 
 	protected string $template;
 
-	private bool $regenerate;
-
-	public function __construct(string $mask, string $template, bool $regenerate = false)
+	public function __construct(Configuration $configuration, string $mask, string $template)
 	{
+		$this->configuration = $configuration;
 		$this->mask = $mask;
 		$this->template = $template;
-		$this->regenerate = $regenerate;
 	}
 
 	public function getMask(): string
@@ -49,28 +50,14 @@ class DefaultGenerator
 		return $this;
 	}
 
-	public function getRegenerate(): bool
-	{
-		return $this->regenerate;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function setRegenerate(bool $regenerate)
-	{
-		$this->regenerate = $regenerate;
-		return $this;
-	}
-
 	/**
 	 * @param array<mixed> $params
 	 */
 	protected function renderTemplate(string $output, array $params): void
 	{
-		if ($this->regenerate || !is_file($output)) {
+		if ($this->configuration->getRegenerate() || !is_file($output)) {
 			file_put_contents($output, sprintf(FileSystem::read($this->template), ...$params));
-			echo "generating: " . Path::realpath($output) . "\n";
+			$this->configuration->getOutput()->writeln("Generating: " . Path::realpath($output));
 		}
 	}
 

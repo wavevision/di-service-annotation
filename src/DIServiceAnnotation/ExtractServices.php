@@ -94,20 +94,30 @@ class ExtractServices
 	 */
 	private function findServices(): array
 	{
+		$fileValidator = new FileValidator($this->configuration);
 		$services = [];
 		/** @var  SplFileInfo $file */
 		foreach (Finder::findFiles($this->configuration->getMask())->from(
 			$this->configuration->getSourceDirectory()
 		) as $file) {
-			$tokenizerResult = $this->tokenizer->getStructureNameFromFile($file->getPathname(), [T_CLASS, T_INTERFACE]);
+			$pathname = $file->getPathname();
+			$tokenizerResult = $this->tokenizer->getStructureNameFromFile($pathname, [T_CLASS, T_INTERFACE]);
 			if ($tokenizerResult !== null) {
 				$className = $tokenizerResult->getFullyQualifiedName();
+				if ($fileValidator->containsErrors($pathname, $className)) {
+					continue;
+				}
 				$serviceAnnotation = $this->getAnnotation($className);
 				if ($serviceAnnotation !== null) {
-					$services[$className] = new Service($serviceAnnotation, $tokenizerResult, $file);
+					$service = new Service($serviceAnnotation, $tokenizerResult, $file);
+					$this->configuration->getOutput()->writeln(
+						"Processing annotation in class: $className"
+					);
+					$services[$className] = $service;
 				}
 			}
 		}
+		$fileValidator->flushCache();
 		return $services;
 	}
 
