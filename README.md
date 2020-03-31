@@ -63,13 +63,13 @@ For configuration options see [Configuration properties](src/DIServiceAnnotation
 
 #### Required
 
-* `sourceDirectory` - location of services
-* `outputFile` - output file for registered services
+* `sourceDirectory: string` – location of services
+* `outputFile: string` – output file for registered services
 
 #### Optional
 
-* `setMask` - mask for file locator - default `*.php`
-* `setFileMapping` - map for splitting configs by namespace
+* `setMask: string` – mask for file locator - default `*.php`
+* `setFileMapping: array` – map for splitting configs by namespace
 
 ```php
 $configuration->setFileMapping([
@@ -77,11 +77,11 @@ $configuration->setFileMapping([
     'RootNamespace\Namespace2' => 'config2.neon',
 ]);
 ```
-* `setInjectGenerator` - set custom generator for injects
-* `setFactoryGenerator` - set custom generator for factories
-* `setComponentFactory` - set custom generator for components
-* `setRegenerate` - regenerate all generated code each run - default `false`
-* `enableFileValidation($autoloadFile, $tempDir = null)` - check each file for fatal errors before reading annotation, skip this file on error
-    * `$autoloadFile` - file for class autoloading - e.g. `vendor/autoload.php`
-    * `$tempDir` - enable cache, directory for cache file - only changed files are validated
+* `setInjectGenerator: Inject` – set custom generator for injects
+* `setFactoryGenerator: Factory` – set custom generator for factories
+* `setComponentFactory: Component` – set custom generator for components
+* `setRegenerate: bool` – regenerate all generated code each run - default `false`
+* `enableFileValidation` – check each file for fatal errors before reading annotation, skip this file on error
+    * `autoloadFile: string` – file for class autoloading - e.g. `vendor/autoload.php`
+    * `tempDir: string` – enable cache, directory for cache file - only changed files are validated
 
