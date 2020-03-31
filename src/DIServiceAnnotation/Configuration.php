@@ -56,7 +56,9 @@ final class Configuration
 
 	private ?string $tempDir;
 
-	public function __construct(string $sourceDirectory, string $outputFile, bool $regenerate = false)
+	private bool $regenerate;
+
+	public function __construct(string $sourceDirectory, string $outputFile)
 	{
 		$this->sourceDirectory = $sourceDirectory;
 		$this->outputFile = $outputFile;
@@ -66,19 +68,10 @@ final class Configuration
 		$this->autoloadFile = null;
 		$this->output = new ConsoleOutput();
 		$this->tempDir = null;
-		$this->injectGenerator = new DefaultInject($this, 'Inject%s', $templates->string('inject.txt'), $regenerate);
-		$this->factoryGenerator = new DefaultFactory(
-			$this,
-			'%sFactory',
-			$templates->string('factory.txt'),
-			$regenerate
-		);
-		$this->componentFactory = new DefaultComponent(
-			$this,
-			'%sComponent',
-			$templates->string('component.txt'),
-			$regenerate
-		);
+		$this->regenerate = false;
+		$this->injectGenerator = new DefaultInject($this, 'Inject%s', $templates->string('inject.txt'));
+		$this->factoryGenerator = new DefaultFactory($this, '%sFactory', $templates->string('factory.txt'));
+		$this->componentFactory = new DefaultComponent($this, '%sComponent', $templates->string('component.txt'));
 	}
 
 	public function getSourceDirectory(): string
@@ -181,9 +174,10 @@ final class Configuration
 	/**
 	 * @return static
 	 */
-	public function enableFileValidation(?string $autoloadFile)
+	public function enableFileValidation(string $autoloadFile, ?string $tempDir = null)
 	{
-		$this->autoloadFile = $autoloadFile;
+		$this->setAutoloadFile($autoloadFile);
+		$this->setTempDir($tempDir);
 		return $this;
 	}
 
@@ -206,10 +200,33 @@ final class Configuration
 		return $this->tempDir;
 	}
 
+	public function getRegenerate(): bool
+	{
+		return $this->regenerate;
+	}
+
 	/**
 	 * @return static
 	 */
-	public function enableCache(?string $tempDir)
+	public function setRegenerate(bool $regenerate)
+	{
+		$this->regenerate = $regenerate;
+		return $this;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function setAutoloadFile(?string $autoloadFile)
+	{
+		$this->autoloadFile = $autoloadFile;
+		return $this;
+	}
+
+	/**
+	 * @return static
+	 */
+	public function setTempDir(?string $tempDir)
 	{
 		$this->tempDir = $tempDir;
 		return $this;

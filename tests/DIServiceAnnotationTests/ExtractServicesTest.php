@@ -127,23 +127,22 @@ class ExtractServicesTest extends TestCase
 			->setSourceDirectory($servicesDir)
 			->setOutputFile($this->resultNeon(self::DEFAULT_NEON))
 			->setFactoryGenerator(
-				new DefaultFactory($configuration, '%sFactory', $templates->string('factory.txt'), false)
+				new DefaultFactory($configuration, '%sFactory', $templates->string('factory.txt'))
 			)
 			->setComponentFactory(
-				new DefaultComponent($configuration, '%sComponent', $templates->string('component.txt'), false)
+				new DefaultComponent($configuration, '%sComponent', $templates->string('component.txt'))
 			)
 			->setFileMapping(
 				[
 					'Wavevision\DIServiceAnnotationTests\Services\Nested' => $this->resultNeon(self::NESTED_NEON),
 				]
 			)
-			->enableFileValidation(__DIR__ . '/../bootstrap.php')
-			->enableCache($tempDir);
+			->setRegenerate(false)
+			->enableFileValidation(__DIR__ . '/../bootstrap.php', $tempDir);
 		$configuration->setInjectGenerator($configuration->getInjectGenerator());
 		/** @var DefaultGenerator $injectGenerator */
 		$injectGenerator = $configuration->getInjectGenerator();
 		$injectGenerator->setMask($injectGenerator->getMask());
-		$injectGenerator->setRegenerate($injectGenerator->getRegenerate());
 		$injectGenerator->setTemplate($injectGenerator->getTemplate());
 		$extractServices = new ExtractServices($configuration);
 		$extractServices->run();

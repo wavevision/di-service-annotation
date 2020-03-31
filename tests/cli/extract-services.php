@@ -10,5 +10,5 @@ Runner::run(
 	(new Configuration(
 		__DIR__ . '/../DIServiceAnnotationTests/Services',
 		__DIR__ . '/../../temp/test.neon'
-	))->enableFileValidation($autoload)->enableCache(__DIR__ . '/../../temp')
+	))->enableFileValidation($autoload, __DIR__ . '/../../temp')
 );
