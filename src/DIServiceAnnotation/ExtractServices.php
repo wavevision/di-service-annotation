@@ -10,6 +10,11 @@ use ReflectionClass;
 use SplFileInfo;
 use Wavevision\Utils\Arrays;
 use Wavevision\Utils\Tokenizer\Tokenizer;
+use function implode;
+use function ksort;
+use function sprintf;
+use const T_CLASS;
+use const T_INTERFACE;
 
 class ExtractServices
 {
@@ -63,11 +68,12 @@ class ExtractServices
 		foreach ($services as $service) {
 			$annotation = $service->getAnnotation();
 			$tokenizeResult = $service->getTokenizeResult();
+			/** @var class-string<object> $className */
 			$className = $tokenizeResult->getFullyQualifiedName();
 			$tokenId = $tokenizeResult->getToken();
 			$file = $service->getFile();
 			$generateFactory = $annotation->generateFactory || $annotation->generateComponent;
-			$orginalName = $tokenizeResult->getName();
+			$originalName = $tokenizeResult->getName();
 			if ($generateFactory) {
 				if ($tokenId === T_INTERFACE) {
 					throw new InvalidState('Unable to generate factory for interface.');
@@ -79,7 +85,7 @@ class ExtractServices
 				$this->generateInject($className, $file);
 			}
 			if ($annotation->generateComponent) {
-				$this->generateComponent($className, $file, $orginalName);
+				$this->generateComponent($className, $file, $originalName);
 			}
 			$lines = $this->generateConfig($annotation, $className, $tokenId, $lines);
 		}
@@ -103,6 +109,7 @@ class ExtractServices
 			$pathname = $file->getPathname();
 			$tokenizerResult = $this->tokenizer->getStructureNameFromFile($pathname, [T_CLASS, T_INTERFACE]);
 			if ($tokenizerResult !== null) {
+				/** @var class-string<object> $className */
 				$className = $tokenizerResult->getFullyQualifiedName();
 				if ($fileValidator->containsErrors($pathname, $className)) {
 					continue;
@@ -121,6 +128,9 @@ class ExtractServices
 		return $services;
 	}
 
+	/**
+	 * @param class-string<object> $className
+	 */
 	private function getAnnotation(string $className): ?DIService
 	{
 		$annotation = $this->annotationReader->getClassAnnotation(new ReflectionClass($className), DIService::class);
@@ -164,6 +174,10 @@ class ExtractServices
 		return "  $name: [" . implode(', ', $attributes) . ']';
 	}
 
+	/**
+	 * @param class-string<object> $className
+	 * @return class-string<object>
+	 */
 	private function generateFactory(string $className, SplFileInfo $file): string
 	{
 		return $this->configuration->getFactoryGenerator()->generate(
@@ -172,16 +186,26 @@ class ExtractServices
 		);
 	}
 
+	/**
+	 * @param class-string<object> $className
+	 */
 	private function generateInject(string $className, SplFileInfo $file): void
 	{
 		$this->configuration->getInjectGenerator()->generate($this->getReflection($className), $file);
 	}
 
+	/**
+	 * @param class-string<object> $className
+	 */
 	private function generateComponent(string $className, SplFileInfo $file, string $originalName): void
 	{
 		$this->configuration->getComponentFactory()->generate($this->getReflection($className), $file, $originalName);
 	}
 
+	/**
+	 * @param class-string<object> $className
+	 * @return ReflectionClass<object>
+	 */
 	private function getReflection(string $className): ReflectionClass
 	{
 		$reflection = new ReflectionClass($className);

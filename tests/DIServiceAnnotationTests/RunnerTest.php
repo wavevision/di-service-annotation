@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Wavevision\DIServiceAnnotation\Configuration;
 use Wavevision\DIServiceAnnotation\Runner;
+use function mkdir;
 
 class RunnerTest extends TestCase
 {
@@ -18,7 +19,7 @@ class RunnerTest extends TestCase
 		$file = vfsStream::url('r/services.neon');
 		$configuration = new Configuration($dir, $file);
 		Runner::run($configuration, $configuration);
-		$this->assertFileNotExists($file);
+		$this->assertFileDoesNotExist($file);
 	}
 
 }

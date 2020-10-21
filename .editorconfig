@@ -1,5 +1,12 @@
 root = true
 
+[*.neon]
+indent_style = tab
+indent_size = tab
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
 [*.txt]
 indent_style = tab
 indent_size = tab

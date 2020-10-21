@@ -15,6 +15,10 @@ use Wavevision\DIServiceAnnotation\Generators\DefaultGenerator;
 use Wavevision\DIServiceAnnotation\InvalidState;
 use Wavevision\DIServiceAnnotation\VoidOutput;
 use Wavevision\Utils\Path;
+use function array_push;
+use function explode;
+use function is_file;
+use function trim;
 
 class ExtractServicesTest extends TestCase
 {

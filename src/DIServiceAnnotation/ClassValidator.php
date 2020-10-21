@@ -10,6 +10,10 @@ class ClassValidator
 
 	use SmartObject;
 
+	/**
+	 * @template T of object
+	 * @param class-string<T> $class
+	 */
 	public function validate(string $class): int
 	{
 		new ReflectionClass($class);

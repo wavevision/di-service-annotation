@@ -2,8 +2,6 @@
 
 namespace Wavevision\DIServiceAnnotation;
 
-//phpcs:disable SlevomatCodingStandard.Variables.UnusedVariable.UnusedVariable
-
 /**
  * @Annotation
  * @Target("CLASS")

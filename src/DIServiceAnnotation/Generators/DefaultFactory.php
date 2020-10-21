@@ -4,10 +4,15 @@ namespace Wavevision\DIServiceAnnotation\Generators;
 
 use ReflectionClass;
 use SplFileInfo;
+use function dirname;
+use function sprintf;
 
 class DefaultFactory extends DefaultGenerator implements Factory
 {
 
+	/**
+	 * @inheritDoc
+	 */
 	public function generate(ReflectionClass $reflectionClass, SplFileInfo $file): string
 	{
 		$name = $reflectionClass->getShortName();
@@ -23,8 +28,9 @@ class DefaultFactory extends DefaultGenerator implements Factory
 			]
 		);
 		require_once $filename;
-		$fullFactoryName = $namespace . '\\' . $factoryName;
-		return $fullFactoryName;
+		/** @var class-string<object> $className */
+		$className = $namespace . '\\' . $factoryName;
+		return $className;
 	}
 
 }

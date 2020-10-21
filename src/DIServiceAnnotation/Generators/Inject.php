@@ -8,6 +8,9 @@ use SplFileInfo;
 interface Inject
 {
 
+	/**
+	 * @param ReflectionClass<object> $reflectionClass
+	 */
 	public function generate(ReflectionClass $reflectionClass, SplFileInfo $file): void;
 
 }

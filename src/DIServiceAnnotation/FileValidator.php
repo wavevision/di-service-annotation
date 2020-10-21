@@ -5,6 +5,7 @@ namespace Wavevision\DIServiceAnnotation;
 use Nette\SmartObject;
 use Wavevision\Utils\ExternalProgram\Executor;
 use Wavevision\Utils\Path;
+use function md5_file;
 
 class FileValidator
 {
@@ -34,8 +35,8 @@ class FileValidator
 					return true;
 				}
 			} else {
-				$classValidator = Path::join(__DIR__, '..', '..', 'cli', 'validate-class.php');
-				$result = Executor::executeUnchecked("php '$classValidator' '$autoload' '$className'");
+				$classValidator = Path::join(__DIR__, '..', '..', 'bin', 'validate-class');
+				$result = Executor::executeUnchecked("$classValidator '$autoload' '$className'");
 				if ($result->getReturnValue() !== 0) {
 					$this->configuration->getOutput()->writeln(
 						"Fatal error in class $className\n" . $result->getOutputAsString()
