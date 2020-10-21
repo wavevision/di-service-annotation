@@ -5,13 +5,16 @@ namespace Wavevision\DIServiceAnnotation;
 use Nette\SmartObject;
 use Nette\Utils\FileSystem;
 use Wavevision\Utils\Path;
+use function is_file;
+use function serialize;
+use function unserialize;
 
 class Cache
 {
 
-	public const FILE = '.di-service-annotation.cache';
-
 	use SmartObject;
+
+	public const FILE = '.di-service-annotation.cache';
 
 	private bool $enabled;
 

@@ -34,21 +34,18 @@
     "sort-packages": true
   },
   "require": {
+    "php": ">=7.4",
     "doctrine/annotations": "^1.8",
     "nette/finder": "^2.5",
-    "php": ">=7.4",
-    "wavevision/utils": "^2.2"
+    "wavevision/utils": "^2.13"
   },
   "require-dev": {
-    "jakub-onderka/php-parallel-lint": "^1.0",
     "mikey179/vfsstream": "^1.6",
-    "phing/phing": "^3.0.0a3",
     "php-coveralls/php-coveralls": "^2.1",
-    "phpstan/phpstan": "^0.11",
-    "phpunit/phpunit": "^8.3",
-    "wavevision/coding-standard": "^3.1"
+    "phpunit/phpunit": "^9.4",
+    "wavevision/coding-standard": "^5.2"
   },
-  "scripts": {
-    "phing": "phing"
+  "extra": {
+    "phpstan": {}
   }
 }

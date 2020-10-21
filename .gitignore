@@ -1,6 +1,8 @@
-.idea/*
-!.idea/codeStyles/codeStyleConfig.xml
-!.idea/codeStyles/Project.xml
-vendor
-temp
+/.idea/**
+!/.idea/codeStyles/
+!/.idea/codeStyles/codeStyleConfig.xml
+!/.idea/codeStyles/Project.xml
+/.phpunit.result.cache
+/temp/
+/vendor/
 /.phpunit.result.cache

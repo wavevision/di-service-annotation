@@ -5,6 +5,9 @@ namespace Wavevision\DIServiceAnnotation\Generators;
 use Nette\Utils\FileSystem;
 use Wavevision\DIServiceAnnotation\Configuration;
 use Wavevision\Utils\Path;
+use function file_put_contents;
+use function is_file;
+use function sprintf;
 
 class DefaultGenerator
 {

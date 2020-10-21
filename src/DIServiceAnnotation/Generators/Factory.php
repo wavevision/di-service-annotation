@@ -8,6 +8,10 @@ use SplFileInfo;
 interface Factory
 {
 
+	/**
+	 * @param ReflectionClass<object> $reflectionClass
+	 * @return class-string<object>
+	 */
 	public function generate(ReflectionClass $reflectionClass, SplFileInfo $file): string;
 
 }

@@ -5,10 +5,17 @@ namespace Wavevision\DIServiceAnnotation\Generators;
 use ReflectionClass;
 use SplFileInfo;
 use Wavevision\Utils\Arrays;
+use function dirname;
+use function explode;
+use function lcfirst;
+use function sprintf;
 
 class DefaultComponent extends DefaultGenerator implements Component
 {
 
+	/**
+	 * @inheritDoc
+	 */
 	public function generate(ReflectionClass $reflectionClass, SplFileInfo $file, string $originalName): void
 	{
 		$namespace = $reflectionClass->getNamespaceName();
