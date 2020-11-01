@@ -9,10 +9,8 @@ git:
 
 install:
   - composer install
-
-jobs:
-  include:
-    - script: make ci
+script:
+  - make ci
 
 cache:
   directories:
